@@ -1,0 +1,6 @@
+nicegui
+pandas
+psd-tools
+Pillow
+numpy
+openpyxl

@@ -1,0 +1,99 @@
+
+> brief-generator@0.1.0 build
+> next build
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/oamengual/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/oamengual/.gemini/antigravity/playground/iridescent-interstellar/brief-generator/package-lock.json
+
+   ▲ Next.js 16.0.10 (Turbopack)
+
+   Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 5 errors:
+./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefings/page.tsx:343:1
+Parsing ecmascript source code failed
+[0m [90m 341 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 342 |[39m             )[33m;[39m
+[31m[1m>[22m[39m[90m 343 |[39m }
+ [90m     |[39m [31m[1m^[22m[39m
+ [90m 344 |[39m[0m
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+
+./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/page.tsx:326:1
+Parsing ecmascript source code failed
+[0m [90m 324 |[39m       [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 325 |[39m       )[33m;[39m
+[31m[1m>[22m[39m[90m 326 |[39m }
+ [90m     |[39m [31m[1m^[22m[39m
+ [90m 327 |[39m[0m
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+
+./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/settings/page.tsx:520:1
+Parsing ecmascript source code failed
+[0m [90m 518 |[39m             [33m<[39m[33m/[39m[33mDialog[39m[33m>[39m
+ [90m 519 |[39m             )[33m;[39m
+[31m[1m>[22m[39m[90m 520 |[39m }
+ [90m     |[39m [31m[1m^[22m[39m
+ [90m 521 |[39m[0m
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+
+./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/templates/page.tsx:71:5
+Parsing ecmascript source code failed
+[0m [90m 69 |[39m
+ [90m 70 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m (
+ [90m    |[39m     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 72 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"min-h-screen bg-background text-foreground pb-20"[39m[33m>[39m
+ [90m 73 |[39m             [33m<[39m[33mdiv[39m className[33m=[39m[32m"container-standard pt-10 space-y-10"[39m[33m>[39m
+ [90m 74 |[39m[0m
+
+Expression expected
+
+
+./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/components/briefing-builder.tsx:342:20
+Parsing ecmascript source code failed
+[0m [90m 340 |[39m                     [33m<[39m[33m/[39m[33mTabsContent[39m[33m>[39m
+ [90m 341 |[39m                 [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+[31m[1m>[22m[39m[90m 342 |[39m             [33m<[39m[33m/[39m[33mTabs[39m[33m>[39m
+ [90m     |[39m                    [31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 343 |[39m         [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m     |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 344 |[39m         [33m<[39m[33m/[39m[33mdiv[39m [33m>[39m
+ [90m 345 |[39m     )[33m;[39m
+ [90m 346 |[39m }[0m
+
+Expected '</', got 'jsx text (
+        )'
+
+Import traces:
+  Server Component:
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/components/briefing-builder.tsx
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefing/new/page.tsx
+
+  Client Component Browser:
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/components/briefing-builder.tsx [Client Component Browser]
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefing/[id]/page.tsx [Client Component Browser]
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefing/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/components/briefing-builder.tsx [Client Component SSR]
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefing/[id]/page.tsx [Client Component SSR]
+    ./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefing/[id]/page.tsx [Server Component]
+
+
+    at <unknown> (./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/briefings/page.tsx:343:1)
+    at <unknown> (./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/page.tsx:326:1)
+    at <unknown> (./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/settings/page.tsx:520:1)
+    at <unknown> (./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/app/templates/page.tsx:71:5)
+    at <unknown> (./.gemini/antigravity/playground/iridescent-interstellar/brief-generator/components/briefing-builder.tsx:342:20)
