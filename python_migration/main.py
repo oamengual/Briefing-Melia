@@ -2,6 +2,11 @@ from nicegui import ui
 from theme import apply_global_styles
 from pages.dashboard import dashboard_page
 from pages.editor import editor_page
+from pages.briefings import briefings_page
+from pages.settings import settings_page
+from pages.calendar import calendar_page
+from pages.templates import templates_page
+from pages.briefing_builder import briefing_builder_page
 
 # Apply high-fidelity styles
 apply_global_styles()

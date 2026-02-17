@@ -1,5 +1,5 @@
 from nicegui import ui
-from ..theme import THEME
+from theme import THEME
 
 def dashboard_header():
     with ui.row().classes('w-full justify-between items-center bg-[#09090b] p-6 border-b border-[#212126] sticky top-0 z-50'):

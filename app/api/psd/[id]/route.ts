@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { storage } from '@/lib/firebase-admin';
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     try {
         const bucketName = process.env.NEXT_PUBLIC_GCS_BUCKET_NAME || process.env.GCS_BUCKET_NAME;
-        if (!bucketName) throw new Error('Bucket name not found');
+        if (!bucketName || !storage) {
+            console.warn('Storage not initialized or bucket name missing');
+            return NextResponse.json({ error: 'Storage Unavailable' }, { status: 503 });
+        }
 
-        const filename = `psds/${params.id}.psd`;
-        const [file] = await storage.bucket(bucketName).file(filename).get();
+        const filename = `psds/${id}.psd`;
 
-        // Pipe the file? Or get a signed URL?
         // Get signed URL for read
         const [url] = await storage.bucket(bucketName).file(filename).getSignedUrl({
             version: 'v4',
@@ -25,11 +27,12 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     try {
         const bucketName = process.env.NEXT_PUBLIC_GCS_BUCKET_NAME || process.env.GCS_BUCKET_NAME;
-        if (bucketName) {
-            const filename = `psds/${params.id}.psd`;
+        if (bucketName && storage) {
+            const filename = `psds/${id}.psd`;
             await storage.bucket(bucketName).file(filename).delete();
         }
         return NextResponse.json({ success: true });

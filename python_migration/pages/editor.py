@@ -1,5 +1,5 @@
 from nicegui import ui
-from ..theme import THEME
+from theme import THEME
 
 @ui.page('/editor/{item_id}')
 def editor_page(item_id: str):
