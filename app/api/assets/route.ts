@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
             const filename = `assets/${asset.id}/${asset.name}`;
             const bucketName = process.env.NEXT_PUBLIC_GCS_BUCKET_NAME || process.env.GCS_BUCKET_NAME;
 
-            if (bucketName) {
+            if (bucketName && storage) {
                 const bucket = storage.bucket(bucketName);
                 const file = bucket.file(filename);
                 await file.save(buffer, {
@@ -39,6 +39,10 @@ export async function POST(request: NextRequest) {
             ...asset,
             data: publicUrl // This is now a clean URL
         };
+
+        if (!firestore) {
+            return NextResponse.json({ error: 'Firestore not initialized' }, { status: 500 });
+        }
 
         await firestore.collection(COLLECTION_ASSETS).doc(asset.id).set(assetRecord);
 

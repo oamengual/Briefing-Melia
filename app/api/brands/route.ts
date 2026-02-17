@@ -5,6 +5,7 @@ import { Brand } from '@/lib/types';
 const COLLECTION_BRANDS = 'brands';
 
 export async function GET() {
+    if (!firestore) return NextResponse.json({ error: 'Firestore not initialized' }, { status: 500 });
     try {
         const snapshot = await firestore.collection(COLLECTION_BRANDS).get();
         const brands = snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() } as Brand));
@@ -16,6 +17,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+    if (!firestore) return NextResponse.json({ error: 'Firestore not initialized' }, { status: 500 });
     try {
         const brand = await request.json();
         const docRef = firestore.collection(COLLECTION_BRANDS).doc(brand.id || undefined);

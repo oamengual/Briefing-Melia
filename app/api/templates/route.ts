@@ -5,6 +5,7 @@ import { Template } from '@/lib/types';
 const COLLECTION_TEMPLATES = 'templates';
 
 export async function GET() {
+    if (!firestore) return NextResponse.json({ error: 'Firestore not initialized' }, { status: 500 });
     try {
         const snapshot = await firestore.collection(COLLECTION_TEMPLATES).get();
         const templates = snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() } as Template));
@@ -16,6 +17,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+    if (!firestore) return NextResponse.json({ error: 'Firestore not initialized' }, { status: 500 });
     try {
         const template = await request.json();
         const docRef = firestore.collection(COLLECTION_TEMPLATES).doc(template.id || undefined);
