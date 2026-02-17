@@ -26,6 +26,7 @@ export function BrandManager({ brands, onUpdate }: BrandManagerProps) {
         brands.find(b => b.id === selectedBrandId),
         [brands, selectedBrandId]);
 
+
     const handleCreateBrand = () => {
         if (!newBrandName.trim()) return;
         const newBrand: Brand = {

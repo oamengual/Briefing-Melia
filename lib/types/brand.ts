@@ -12,6 +12,9 @@ export interface Brand {
     id: string;
     name: string;
     colors: string[]; // Hex codes
-    fontIds: string[]; // References to BrandAsset IDs
+    fontIds: {
+        heading?: string;
+        body?: string;
+    };
     logoIds: string[]; // References to BrandAsset IDs
 }
