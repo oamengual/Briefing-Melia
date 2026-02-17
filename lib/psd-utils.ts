@@ -148,7 +148,7 @@ export const processLayer = (layer: any): EditorLayer => {
     };
 };
 
-export const parsePsd = async (file: File): Promise<{ state: Partial<EditorState>; preview?: string }> => {
+export const parsePsd = async (file: File): Promise<{ state: EditorState; preview?: string }> => {
     const arrayBuffer = await file.arrayBuffer();
     const psd = readPsd(arrayBuffer, {
         skipLayerImageData: false,
@@ -181,8 +181,8 @@ export const parsePsd = async (file: File): Promise<{ state: Partial<EditorState
 
     return {
         state: {
-            width: psd.width,
-            height: psd.height,
+            width: psd.width || 0,
+            height: psd.height || 0,
             layers,
             scale: fitScale || 0.5,
             pan: { x: 0, y: 0 },
@@ -190,7 +190,7 @@ export const parsePsd = async (file: File): Promise<{ state: Partial<EditorState
             activeTool: 'move',
             currentFeedRow: 0,
             feedData: undefined
-        },
+        } as EditorState,
         preview
     };
 };

@@ -44,7 +44,7 @@ export function BrandManager() {
 
         // Load Assets
         try {
-            const fontIds: string[] = Array.isArray(brand.fontIds) ? brand.fontIds : [];
+            const fontIds = [brand.fontIds?.heading, brand.fontIds?.body].filter((id): id is string => !!id);
             const fonts = await Promise.all(fontIds.map(id => getAsset(id)));
             setFontAssets(fonts.filter((f): f is BrandAsset => !!f));
 
@@ -62,7 +62,7 @@ export function BrandManager() {
             id: crypto.randomUUID(),
             name: 'New Brand',
             colors: ['#000000', '#FFFFFF'],
-            fontIds: [],
+            fontIds: {},
             logoIds: []
         };
         handleSelectBrand(newBrand);
@@ -76,7 +76,10 @@ export function BrandManager() {
             ...selectedBrand,
             name: brandName,
             colors: brandColors,
-            fontIds: fontAssets.map(f => f.id),
+            fontIds: {
+                heading: fontAssets[0]?.id,
+                body: fontAssets[1]?.id
+            },
             logoIds: logoAssets.map(l => l.id)
         };
 
@@ -261,7 +264,7 @@ export function BrandManager() {
                                     </div>
 
                                     <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground pt-2 border-t border-border">
-                                        <span className="flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> {(brand.fontIds || []).length} Fonts</span>
+                                        <span className="flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> {[brand.fontIds?.heading, brand.fontIds?.body].filter(Boolean).length} Fonts</span>
                                         <span className="flex items-center gap-1.5"><Image className="w-3.5 h-3.5" /> {(brand.logoIds || []).length} Logos</span>
                                     </div>
                                 </div>

@@ -9,16 +9,7 @@ import { getPlacements } from '@/lib/storage';
 import { Placement } from '@/lib/types'; // Import Placement type
 import { savePsd } from '@/lib/psd-storage';
 
-import { EditorState } from '@/lib/types';
-
-export interface Template {
-    id: string;
-    name: string;
-    size: string;
-    channel?: string;
-    preview?: string;
-    editorState?: EditorState | Partial<EditorState>;
-}
+import { EditorState, PsdTemplate as Template } from '@/lib/types';
 
 import { MatrixState } from '@/lib/types';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";

@@ -63,7 +63,7 @@ export default function EditorPage() {
                     const file = await getPsd(brief.state.psdTemplateId);
                     if (file) {
                         const { state } = await parsePsd(file as File);
-                        setCanvas(state as Partial<EditorState>);
+                        setCanvas(state);
                     }
                 } catch (err) {
                     console.error("Failed to load PSD Template", err);
@@ -266,7 +266,7 @@ export default function EditorPage() {
             if (file) {
                 const { state } = await parsePsd(file as File);
                 // Reset/Set Canvas
-                setCanvas(state as Partial<EditorState>);
+                setCanvas(state);
             }
         } catch (err) {
             console.error("Failed to load template", err);

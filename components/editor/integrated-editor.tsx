@@ -7,7 +7,7 @@ import { getBrief, saveBrief } from '@/lib/storage';
 import { Brief } from '@/lib/types';
 import { saveTemplateState, getTemplateState, getPsd, saveTemplatePreview, getTemplatePreview } from '@/lib/psd-storage';
 import { parsePsd } from '@/lib/psd-utils';
-import { EditorState, Brand, BrandAsset } from '@/lib/types';
+import { EditorState, Brand, BrandAsset, PsdTemplate } from '@/lib/types';
 import { useEditorStore } from '@/lib/editor-store';
 import { getBrands, getAsset } from '@/lib/brand-storage';
 
@@ -30,14 +30,7 @@ import {
 import { MARKETS } from '@/lib/constants';
 
 
-type PsdTemplate = {
-    id: string;
-    name: string;
-    size: string;
-    channel?: string;
-    preview?: string;
-    editorState?: EditorState | Partial<EditorState>;
-};
+
 
 export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: Brief }) {
     const {
@@ -125,9 +118,10 @@ export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: 
                         if (match) {
                             setActiveBrand(match);
                             // Load Fonts
-                            if (match.fontIds?.length) {
+                            const fontIds = [match.fontIds.heading, match.fontIds.body].filter((id): id is string => !!id);
+                            if (fontIds.length > 0) {
                                 try {
-                                    const fonts = await Promise.all(match.fontIds.map(id => getAsset(id)));
+                                    const fonts = await Promise.all(fontIds.map(id => getAsset(id)));
                                     setBrandFonts(fonts.filter((f): f is BrandAsset => !!f && f.type === 'font'));
                                 } catch (e) {
                                     console.error("Error loading brand fonts", e);
@@ -151,7 +145,7 @@ export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: 
                         const file = await getPsd(sourceBrief.state.psdTemplateId);
                         if (file && isMounted) {
                             const { state: psdState } = await parsePsd(file as File);
-                            setCanvas(psdState as Partial<EditorState>);
+                            setCanvas(psdState);
                         }
                     }
                 } catch (err) {
@@ -456,7 +450,7 @@ export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: 
                 const file = await getPsd(id);
                 if (file) {
                     const { state } = await parsePsd(file as File);
-                    setCanvas({ ...(state as Partial<EditorState>), feedData: currentFeedData });
+                    setCanvas({ ...state, feedData: currentFeedData });
                     // Init IDB
                     await saveTemplateState(id, state);
                 }

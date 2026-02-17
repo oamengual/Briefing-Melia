@@ -99,7 +99,8 @@ export interface PsdTemplate {
     name: string;
     size: string;
     preview?: string;
-    editorState?: EditorState | Partial<EditorState>;
+    channel?: string;
+    editorState?: EditorState;
 }
 
 export interface Brief {

@@ -5,22 +5,11 @@ import { useBriefingStore } from '@/lib/store';
 import { useEditorStore } from '@/lib/editor-store';
 import { ExportPreview } from '@/components/editor/export-preview';
 import { FeedRow } from '@/components/editor/export/types';
-import { Brief } from '@/lib/types';
 import { getTemplateState, getPsd, saveTemplateState } from '@/lib/psd-storage';
 import { parsePsd } from '@/lib/psd-utils';
 import { MARKETS, PLACEMENTS as SEED_PLACEMENTS } from '@/lib/constants';
 import { getPlacements } from '@/lib/storage';
-import { Market, Placement } from '@/lib/types';
-
-// Redefine locally if needed to avoid circular imports or just use exact shape
-type PsdTemplate = {
-    id: string;
-    name: string;
-    size: string;
-    channel?: string;
-    preview?: string;
-    editorState?: any;
-};
+import { Brief, Market, Placement, EditorState, PsdTemplate } from '@/lib/types';
 
 export function ExportPage({ brief }: { brief: Brief }) {
     const { psdTemplates } = useBriefingStore();
@@ -55,7 +44,7 @@ export function ExportPage({ brief }: { brief: Brief }) {
                 const file = await getPsd(id);
                 if (file) {
                     const parsed = await parsePsd(file as File);
-                    state = parsed.state;
+                    state = parsed.state as EditorState;
                     // Self-heal: save it for next time
                     await saveTemplateState(id, state);
                 }
