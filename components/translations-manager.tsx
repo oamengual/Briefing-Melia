@@ -113,8 +113,8 @@ export function TranslationsManager() {
             const promises: Promise<void>[] = [];
             for (const lang of langsToProcess) {
                 const newValues: Partial<CreativeInputs> = { ...translations[lang] };
-                if (!newValues.landing) newValues.landing = {};
-                if (!newValues.newsletter) newValues.newsletter = {};
+                if (!newValues.landing) newValues.landing = {} as any;
+                if (!newValues.newsletter) newValues.newsletter = {} as any;
 
                 let hasUpdates = false;
 
