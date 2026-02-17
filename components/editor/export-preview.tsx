@@ -229,7 +229,7 @@ export function ExportPreview({ templates, brief, onLoadState }: ExportPreviewPr
                             }
 
                             // Optimization Helper
-                            const optimizeImage = async (base64Png: string, format: 'jpg' | 'png', maxKb?: number): Promise<string> => {
+                            const optimizeImage = async (base64Png: string, format: 'jpg' | 'jpeg' | 'png', maxKb?: number): Promise<string> => {
                                 if (format === 'png' && !maxKb) return base64Png;
 
                                 return new Promise((resolve) => {
@@ -282,7 +282,7 @@ export function ExportPreview({ templates, brief, onLoadState }: ExportPreviewPr
                                 const chConfig = channelConfigs.find(c => c.channel === target.channel);
 
                                 // Format priority: Placement > Channel > Default (PNG)
-                                let format: 'png' | 'jpg' = 'png';
+                                let format: 'png' | 'jpg' | 'jpeg' = 'png';
                                 const allowed = target.outputFormats || chConfig?.defaultOutputFormats || [];
                                 if (allowed.includes('jpg') || allowed.includes('jpeg')) format = 'jpg';
                                 if (allowed.includes('png')) format = 'png'; // Prefer PNG if both? User said "if pieces MUST be jpg". 
