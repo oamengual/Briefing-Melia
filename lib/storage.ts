@@ -13,24 +13,28 @@ import {
     ActivityLog,
     NamingConvention,
     TraffickingData,
-    Placement
+    Placement,
+    ContentConfig
 } from './types';
 import { PLACEMENTS } from './constants';
 import { DEMO_BRIEFS } from './demo-data';
+import { get, set } from 'idb-keyval';
 
 // Keep local storage keys for non-cloud data
 const USERS_KEY = 'briefing_station_users';
 const SETTINGS_KEY = 'briefing_station_settings';
-const TEMPLATES_KEY = 'briefing_station_templates';
 
-// --- API CLIENT ---
+// IDB Keys
+const BRIEFS_KEY = 'mockup_briefs';
+const TEMPLATES_KEY = 'mockup_templates';
+
+// --- API CLIENT (now Mockup LocalStorage) ---
 
 export async function getBriefs(): Promise<Brief[]> {
     if (typeof window === 'undefined') return [];
     try {
-        const res = await fetch('/api/briefs');
-        if (!res.ok) throw new Error('Failed to fetch briefs');
-        return await res.json();
+        const briefs = await get<Brief[]>(BRIEFS_KEY);
+        return briefs || [];
     } catch (e) {
         console.error("Failed to load briefs", e);
         return [];
@@ -45,13 +49,13 @@ export async function saveBrief(state: BriefingState['inputs'] & {
     namingConvention?: NamingConvention,
     psdTemplateId?: string,
     psdTemplates?: any[],
-    trafficking?: Record<string, TraffickingData>
+    trafficking?: Record<string, TraffickingData>,
+    content?: ContentConfig
 }, id?: string): Promise<string> {
 
-    // Construct the Brief object (partial)
     const partialBrief: Partial<Brief> = {
         name: state.campaignName || 'Untitled Campaign',
-        status: 'draft', // Default, server or UI should handle status persistence logic if needed
+        status: 'draft',
         state: {
             inputs: state,
             creative: state.creative,
@@ -60,31 +64,38 @@ export async function saveBrief(state: BriefingState['inputs'] & {
             lockedFields: state.lockedFields,
             namingConvention: state.namingConvention,
             psdTemplateId: state.psdTemplateId,
-            psdTemplates: state.psdTemplates,
-            trafficking: state.trafficking
+            psdTemplates: (state.psdTemplates || []).map(t => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { editorState, preview, ...rest } = t;
+                return rest;
+            }),
+            trafficking: state.trafficking,
+            content: state.content
         }
     };
 
     try {
+        const briefs = await getBriefs();
         if (id) {
-            // Update existing
-            const res = await fetch(`/api/briefs/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(partialBrief)
-            });
-            if (!res.ok) throw new Error('Failed to update brief');
+            const index = briefs.findIndex(b => b.id === id);
+            if (index >= 0) {
+                briefs[index] = { ...briefs[index], ...partialBrief } as Brief;
+            } else {
+                partialBrief.id = id;
+                partialBrief.createdAt = new Date().toISOString();
+                partialBrief.updatedAt = new Date().toISOString();
+                briefs.push(partialBrief as Brief);
+            }
+            await set(BRIEFS_KEY, briefs);
             return id;
         } else {
-            // Create new
-            const res = await fetch('/api/briefs', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(partialBrief)
-            });
-            if (!res.ok) throw new Error('Failed to create brief');
-            const data = await res.json();
-            return data.id;
+            const newId = crypto.randomUUID();
+            partialBrief.id = newId;
+            partialBrief.createdAt = new Date().toISOString();
+            partialBrief.updatedAt = new Date().toISOString();
+            briefs.push(partialBrief as Brief);
+            await set(BRIEFS_KEY, briefs);
+            return newId;
         }
     } catch (error) {
         console.error('Error saving brief:', error);
@@ -94,10 +105,8 @@ export async function saveBrief(state: BriefingState['inputs'] & {
 
 export async function getBrief(id: string): Promise<Brief | undefined> {
     try {
-        const res = await fetch(`/api/briefs/${id}`);
-        if (res.status === 404) return undefined;
-        if (!res.ok) throw new Error('Failed to fetch brief');
-        return await res.json();
+        const briefs = await getBriefs();
+        return briefs.find(b => b.id === id);
     } catch (e) {
         console.error("Failed to load brief", e);
         return undefined;
@@ -106,7 +115,8 @@ export async function getBrief(id: string): Promise<Brief | undefined> {
 
 export async function deleteBrief(id: string) {
     try {
-        await fetch(`/api/briefs/${id}`, { method: 'DELETE' });
+        const briefs = await getBriefs();
+        await set(BRIEFS_KEY, briefs.filter(b => b.id !== id));
     } catch (e) {
         console.error("Failed to delete brief", e);
     }
@@ -119,23 +129,17 @@ export async function duplicateBrief(id: string): Promise<string | null> {
 
         const newBrief = {
             ...original,
+            id: crypto.randomUUID(),
             name: `${original.name} (Copy)`,
-            status: 'draft' as const
+            status: 'draft' as const,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
         };
 
-        // Remove ID to force creation
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { id: _, ...rest } = newBrief;
-
-        const res = await fetch('/api/briefs', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(rest)
-        });
-
-        if (!res.ok) return null;
-        const data = await res.json();
-        return data.id;
+        const briefs = await getBriefs();
+        briefs.push(newBrief);
+        await set(BRIEFS_KEY, briefs);
+        return newBrief.id;
     } catch (error) {
         console.error('Failed to duplicate brief', error);
         return null;
@@ -144,11 +148,13 @@ export async function duplicateBrief(id: string): Promise<string | null> {
 
 export async function updateBriefStatus(id: string, status: Brief['status']) {
     try {
-        await fetch(`/api/briefs/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status })
-        });
+        const briefs = await getBriefs();
+        const index = briefs.findIndex(b => b.id === id);
+        if (index >= 0) {
+            briefs[index].status = status;
+            briefs[index].updatedAt = new Date().toISOString();
+            await set(BRIEFS_KEY, briefs);
+        }
     } catch (error) {
         console.error('Failed to update status', error);
     }
@@ -242,22 +248,19 @@ export function clearAllData() {
     if (typeof window === 'undefined') return;
     localStorage.removeItem(USERS_KEY);
     localStorage.removeItem(SETTINGS_KEY);
-    // API Clear? No, that would be dangerous. Just reload.
-    window.location.reload();
+    // Let's clear indexeddb too as part of "clearAllData"
+    if (window.indexedDB) {
+        import('idb-keyval').then(({ clear }) => clear().catch(e => console.error(e)));
+    }
+    setTimeout(() => window.location.reload(), 100);
 }
 
 export async function loadDemoData() {
-    // Porting demo data to Cloud
-    // Iterate and POST
-    for (const brief of DEMO_BRIEFS) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { id, ...rest } = brief;
-        await fetch('/api/briefs', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(rest)
-        });
-    }
+    const briefs = await getBriefs();
+    const toAdd = DEMO_BRIEFS.map(b => ({
+        ...b, id: crypto.randomUUID()
+    }));
+    await set(BRIEFS_KEY, [...briefs, ...toAdd]);
     window.location.reload();
 }
 
@@ -347,16 +350,8 @@ const DEFAULT_TEMPLATES: Template[] = [
 export async function getTemplates(): Promise<Template[]> {
     if (typeof window === 'undefined') return [];
     try {
-        const res = await fetch('/api/templates');
-        if (!res.ok) {
-            // Fallback to defaults if API fails or empty?
-            // For now, let's treat defaults as seeds if API returns empty
-            return DEFAULT_TEMPLATES;
-        }
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-            return data;
-        }
+        const templates = await get<Template[]>(TEMPLATES_KEY);
+        if (templates && templates.length > 0) return templates;
         return DEFAULT_TEMPLATES;
     } catch (e) {
         console.error("Failed to load templates", e);
@@ -366,12 +361,14 @@ export async function getTemplates(): Promise<Template[]> {
 
 export async function saveTemplate(template: Template) {
     try {
-        // Upsert logic
-        await fetch('/api/templates', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(template)
-        });
+        const templates = await getTemplates();
+        const index = templates.findIndex(t => t.id === template.id);
+        if (index >= 0) {
+            templates[index] = template;
+        } else {
+            templates.push(template);
+        }
+        await set(TEMPLATES_KEY, templates);
     } catch (e) {
         console.error("Failed to save template", e);
     }
@@ -379,9 +376,10 @@ export async function saveTemplate(template: Template) {
 
 export async function deleteTemplate(id: string) {
     try {
-        await fetch(`/api/templates/${id}`, { method: 'DELETE' });
+        let templates = await getTemplates();
+        templates = templates.filter(t => t.id !== id);
+        await set(TEMPLATES_KEY, templates);
     } catch (e) {
         console.error("Failed to delete template", e);
     }
 }
-

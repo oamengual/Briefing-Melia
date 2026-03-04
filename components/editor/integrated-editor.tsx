@@ -32,7 +32,7 @@ import { MARKETS } from '@/lib/constants';
 
 
 
-export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: Brief }) {
+export function IntegratedEditor({ briefId, brief, brandFonts = [], activeBrand = null }: { briefId: string, brief?: Brief, brandFonts?: BrandAsset[], activeBrand?: Brand | null }) {
     const {
         layers, width, height, setCanvas,
         feedData, currentFeedRow, setCurrentRow, setFeedData, getState, alignSelectedLayers, distributeSelectedLayers, selectedLayerIds
@@ -44,9 +44,7 @@ export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: 
     const [psdTemplates, setPsdTemplates] = React.useState<PsdTemplate[]>([]);
     const [isFullScreen, setIsFullScreen] = React.useState(false);
 
-    // Brand Assets State
-    const [activeBrand, setActiveBrand] = React.useState<Brand | null>(null);
-    const [brandFonts, setBrandFonts] = React.useState<BrandAsset[]>([]);
+    // Remove local Brand Assets State (now props)
 
     const saveTimeoutRef = React.useRef<NodeJS.Timeout>(null);
 
@@ -110,30 +108,13 @@ export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: 
                 setCurrentBrief(sourceBrief);
                 setBriefName(sourceBrief.name);
 
-                // Load Brand Assets
-                const brandName = sourceBrief.state.inputs.brand;
-                if (brandName) {
-                    getBrands().then(async (brands) => {
-                        const match = brands.find(b => b.name.toLowerCase() === brandName.toLowerCase());
-                        if (match) {
-                            setActiveBrand(match);
-                            // Load Fonts
-                            const fontIds = [match.fontIds.heading, match.fontIds.body].filter((id): id is string => !!id);
-                            if (fontIds.length > 0) {
-                                try {
-                                    const fonts = await Promise.all(fontIds.map(id => getAsset(id)));
-                                    setBrandFonts(fonts.filter((f): f is BrandAsset => !!f && f.type === 'font'));
-                                } catch (e) {
-                                    console.error("Error loading brand fonts", e);
-                                }
-                            }
-                        }
-                    });
-                }
+                // Brand loading moved to BriefingBuilder
             }
 
             // 1. Load Active PSD Template
             if (sourceBrief.state.psdTemplateId) {
+                // ... (rest of the effect)
+
                 try {
                     // Check if we have saved state first (from our hydrated list)
                     const savedTpl = hydratedTemplates.find(t => t.id === sourceBrief.state.psdTemplateId);
@@ -482,6 +463,7 @@ export function IntegratedEditor({ briefId, brief }: { briefId: string, brief?: 
             "flex bg-muted/30 w-full radius-card overflow-hidden font-sans text-xs select-none shadow-card border border-border relative transition-all duration-300",
             isFullScreen ? "fixed inset-0 z-[100] h-screen w-screen rounded-none border-none m-0" : "h-[850px]"
         )}>
+
             {/* Left Panel */}
             <aside className="w-[280px] bg-card flex flex-col shrink-0 z-10 shadow-sm border-r border-border">
                 <div className="flex-1 flex flex-col min-h-[200px] overflow-hidden border-b border-border">

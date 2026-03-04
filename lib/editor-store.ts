@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { EditorState, EditorLayer } from '@/lib/types';
 
-interface EditorStore extends Omit<EditorState, 'selectedLayerId'> {
-    selectedLayerIds: string[];
+interface EditorStore extends EditorState {
     setCanvas: (state: Partial<EditorState>) => void;
     setScale: (scale: number) => void;
     addLayer: (layer: EditorLayer) => void;
@@ -153,15 +152,17 @@ const insertNode = (nodes: EditorLayer[], targetId: string, position: 'before' |
 };
 
 
-const initialState: any = {
+const initialState: Pick<EditorStore, 'width' | 'height' | 'layers' | 'selectedLayerIds' | 'scale' | 'pan' | 'currentFeedRow' | 'activeTool' | 'history' | 'future'> = {
     width: 1080,
     height: 1080,
     layers: [],
+    selectedLayerIds: [],
     scale: 0.5,
     pan: { x: 0, y: 0 },
-    selectedLayerIds: [],
     currentFeedRow: 0,
     activeTool: 'move',
+    history: [],
+    future: [],
 };
 
 export const useEditorStore = create<EditorStore>((set, get) => ({

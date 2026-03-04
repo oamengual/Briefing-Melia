@@ -13,7 +13,7 @@ import { Market, Placement } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 
 export function FeedPreview() {
-    const { matrix, inputs, creative, translations, namingConvention } = useBriefingStore();
+    const { matrix, inputs, creative, translations, namingConvention, content } = useBriefingStore();
     const [activeTab, setActiveTab] = React.useState<'media' | 'creative'>('creative');
 
     // Dynamic Placements
@@ -21,6 +21,41 @@ export function FeedPreview() {
     React.useEffect(() => {
         setPlacements(getPlacements());
     }, []);
+
+    const resolveContentText = React.useCallback((market: Market, fieldKey: 'mainMessage' | 'considerations' | 'legalTexts') => {
+        const lang = market.defaultLang;
+        const localTrans = translations[lang] || {};
+
+        // 1. Translated exception
+        const fieldData = content[fieldKey];
+        if (!fieldData) return '';
+
+        let exceptionId: string | undefined;
+        for (const exc of (fieldData.exceptions || [])) {
+            if ((exc.markets || []).includes(market.code)) {
+                exceptionId = exc.id;
+                break;
+            }
+        }
+
+        if (exceptionId && localTrans.content?.[fieldKey]?.exceptions?.[exceptionId]) {
+            return localTrans.content[fieldKey].exceptions![exceptionId];
+        }
+
+        // 2. Original exception
+        if (exceptionId) {
+            const orgExc = fieldData.exceptions.find(e => e.id === exceptionId);
+            if (orgExc?.text) return orgExc.text;
+        }
+
+        // 3. Translated default
+        if (localTrans.content?.[fieldKey]?.defaultText) {
+            return localTrans.content[fieldKey].defaultText;
+        }
+
+        // 4. Original default
+        return fieldData.defaultText || '';
+    }, [translations, content]);
 
     const resolveContent = React.useCallback((market: Market) => {
         const lang = market.defaultLang;
@@ -33,8 +68,11 @@ export function FeedPreview() {
             usp1: localTrans.usp1 || creative.usp1,
             usp2: localTrans.usp2 || creative.usp2,
             usp3: localTrans.usp3 || creative.usp3,
+            mainMessage: resolveContentText(market, 'mainMessage'),
+            considerations: resolveContentText(market, 'considerations'),
+            legalTexts: resolveContentText(market, 'legalTexts'),
         };
-    }, [translations, creative]);
+    }, [translations, creative, resolveContentText]);
 
     // Helper to resolve token values
     const resolveToken = (token: string, data: {
@@ -185,7 +223,7 @@ export function FeedPreview() {
         if (activeCreativeFields.usp1) headers.push('USP1');
         if (activeCreativeFields.usp2) headers.push('USP2');
         if (activeCreativeFields.usp3) headers.push('USP3');
-        headers.push('KeyVisual');
+        headers.push('Main Message', 'Considerations', 'Legal Texts', 'KeyVisual');
 
         const csvContent = [
             headers.join(','),
@@ -204,6 +242,10 @@ export function FeedPreview() {
                 if (activeCreativeFields.usp1) values.push(`"${content.usp1 || ''}"`);
                 if (activeCreativeFields.usp2) values.push(`"${content.usp2 || ''}"`);
                 if (activeCreativeFields.usp3) values.push(`"${content.usp3 || ''}"`);
+
+                values.push(`"${content.mainMessage || ''}"`);
+                values.push(`"${content.considerations || ''}"`);
+                values.push(`"${content.legalTexts || ''}"`);
 
                 values.push(`"${creative.keyVisualUrl || ''}"`);
 
@@ -294,6 +336,9 @@ export function FeedPreview() {
                                             {activeCreativeFields.usp1 && <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">USP1</th>}
                                             {activeCreativeFields.usp2 && <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">USP2</th>}
                                             {activeCreativeFields.usp3 && <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">USP3</th>}
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Main Msg</th>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Con.</th>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Legal</th>
                                         </>
                                     )}
                                 </tr>
@@ -333,6 +378,9 @@ export function FeedPreview() {
                                                 {activeCreativeFields.usp1 && <td className="px-6 py-3 text-xs text-muted-foreground">{content.usp1}</td>}
                                                 {activeCreativeFields.usp2 && <td className="px-6 py-3 text-xs text-muted-foreground">{content.usp2}</td>}
                                                 {activeCreativeFields.usp3 && <td className="px-6 py-3 text-xs text-muted-foreground">{content.usp3}</td>}
+                                                <td className="px-6 py-3 text-xs text-muted-foreground truncate max-w-[150px]" title={content.mainMessage}>{content.mainMessage}</td>
+                                                <td className="px-6 py-3 text-xs text-muted-foreground truncate max-w-[150px]" title={content.considerations}>{content.considerations}</td>
+                                                <td className="px-6 py-3 text-xs text-muted-foreground truncate max-w-[150px]" title={content.legalTexts}>{content.legalTexts}</td>
                                             </tr>
                                         )
                                     })

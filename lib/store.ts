@@ -1,22 +1,23 @@
 import { create } from 'zustand';
-import { CampaignInputs, MatrixState, CreativeInputs, NamingConvention, TraffickingData, PsdTemplate } from './types';
+import { CampaignInputs, MatrixState, CreativeInputs, NamingConvention, TraffickingData, PsdTemplate, ContentConfig, MarketContentSettings, LandingMarketConfig, BriefTranslation } from './types';
 import { getSettings } from './storage';
 
 export interface BriefingState {
     inputs: CampaignInputs;
     creative: CreativeInputs;
-    translations: Record<string, Partial<CreativeInputs>>; // Key: 'es', 'fr', etc.
+    translations: Record<string, BriefTranslation>; // Key: 'es', 'fr', etc.
     matrix: MatrixState; // Key: Market Selector (e.g. "US (Estados Unidos)"), Value: Array of Placement IDs
     lockedFields: string[]; // Fields that should not be auto-translated
     namingConvention?: NamingConvention; // The convention used for this brief
     psdTemplateId?: string;
     psdTemplates?: PsdTemplate[];
     trafficking: Record<string, TraffickingData>; // Key: "marketSelector_placementId"
+    content: ContentConfig;
 
     // Actions
     setInputs: (inputs: Partial<CampaignInputs>) => void;
     setCreative: (inputs: Partial<CreativeInputs>) => void;
-    setTranslation: (lang: string, inputs: Partial<CreativeInputs>) => void;
+    setTranslation: (lang: string, inputs: BriefTranslation) => void;
     togglePlacement: (marketSelector: string, placementId: string) => void;
     toggleMarketAll: (marketSelector: string, placementIds: string[], force?: boolean) => void; // Convenience to select all
     togglePlacementRow: (marketSelectors: string[], placementId: string, force?: boolean) => void;
@@ -27,17 +28,24 @@ export interface BriefingState {
     removePsdTemplate: (id: string) => void;
     setTrafficking: (id: string, data: Partial<TraffickingData>) => void;
 
+    // Content Actions
+    setContentField: (field: 'mainMessage' | 'considerations' | 'legalTexts', defaultText: string) => void;
+    setContentExceptions: (field: 'mainMessage' | 'considerations' | 'legalTexts', exceptions: any[]) => void;
+    setMarketSetting: (market: string, updates: Partial<MarketContentSettings>) => void;
+    setLandingConfig: (market: string, updates: Partial<LandingMarketConfig>) => void;
+
     // Persistence
     loadBrief: (state: {
         inputs: CampaignInputs,
         creative: CreativeInputs,
-        translations: Record<string, Partial<CreativeInputs>>,
+        translations: Record<string, BriefTranslation>,
         matrix: MatrixState,
         lockedFields?: string[],
         namingConvention?: NamingConvention,
         psdTemplateId?: string,
         psdTemplates?: PsdTemplate[],
-        trafficking?: Record<string, TraffickingData>
+        trafficking?: Record<string, TraffickingData>,
+        content?: ContentConfig
     }) => void;
     reset: () => void;
 }
@@ -68,6 +76,14 @@ const DEFAULT_CREATIVE: CreativeInputs = {
     keyVisualUrl: '',
 };
 
+const DEFAULT_CONTENT: ContentConfig = {
+    mainMessage: { defaultText: '', exceptions: [] },
+    considerations: { defaultText: '', exceptions: [] },
+    legalTexts: { defaultText: '', exceptions: [] },
+    marketSettings: {},
+    landingConfig: {}
+};
+
 export const useBriefingStore = create<BriefingState>((set) => ({
     inputs: DEFAULT_INPUTS,
     creative: DEFAULT_CREATIVE,
@@ -77,6 +93,7 @@ export const useBriefingStore = create<BriefingState>((set) => ({
     psdTemplateId: undefined,
     psdTemplates: [],
     trafficking: {},
+    content: DEFAULT_CONTENT,
 
     setPsdTemplateId: (id) => set({ psdTemplateId: id }),
     addPsdTemplate: (tpl) => set((state) => ({ psdTemplates: [...(state.psdTemplates || []), tpl] })),
@@ -87,6 +104,60 @@ export const useBriefingStore = create<BriefingState>((set) => ({
             [id]: { ...state.trafficking[id], ...data }
         }
     })),
+
+    setContentField: (field, defaultText) => set((state) => ({
+        content: {
+            ...state.content,
+            [field]: { ...state.content[field], defaultText }
+        }
+    })),
+
+    setContentExceptions: (field, exceptions) => set((state) => ({
+        content: {
+            ...state.content,
+            [field]: { ...state.content[field], exceptions }
+        }
+    })),
+
+    setMarketSetting: (market, updates) => set((state) => {
+        const currentSettings = state.content.marketSettings[market] || {
+            addTransferLink: false,
+            addRiuClassLink: false,
+            excludeGaroe: false,
+            excludeFlightHotel: false,
+            excludePlazaHotels: false,
+            locations: {
+                landing: false, newsletterB2C: false, newsletterRC: false,
+                lastMinuteNewsletterB2C: false, lastMinuteNewsletterRC: false,
+                pushB2C: false, pushRC: false, lastMinutePushB2C: false, lastMinutePushRC: false
+            }
+        };
+        return {
+            content: {
+                ...state.content,
+                marketSettings: {
+                    ...state.content.marketSettings,
+                    [market]: { ...currentSettings, ...updates }
+                }
+            }
+        };
+    }),
+
+    setLandingConfig: (market, updates) => set((state) => {
+        const currentConfig = state.content.landingConfig[market] || {
+            url: '', updateDate: '', hasFastbooking: false, hotelsToShow: '',
+            showPromoCode: false, promoCodeText: '', hasCountdown: false, countdownDate: ''
+        };
+        return {
+            content: {
+                ...state.content,
+                landingConfig: {
+                    ...state.content.landingConfig,
+                    [market]: { ...currentConfig, ...updates }
+                }
+            }
+        };
+    }),
 
     setInputs: (newInputs) =>
         set((state) => ({ inputs: { ...state.inputs, ...newInputs } })),
@@ -111,7 +182,8 @@ export const useBriefingStore = create<BriefingState>((set) => ({
         namingConvention: loadedState.namingConvention,
         psdTemplateId: loadedState.psdTemplateId,
         psdTemplates: loadedState.psdTemplates || [],
-        trafficking: loadedState.trafficking || {}
+        trafficking: loadedState.trafficking || {},
+        content: loadedState.content || DEFAULT_CONTENT
     }),
 
     reset: () => {
@@ -129,7 +201,8 @@ export const useBriefingStore = create<BriefingState>((set) => ({
             namingConvention: settings.activeNamingConvention, // Initialize with global default
             psdTemplateId: undefined,
             psdTemplates: [],
-            trafficking: {}
+            trafficking: {},
+            content: DEFAULT_CONTENT
         });
     },
 

@@ -10,8 +10,9 @@ import { MarketMatrix } from '@/components/market-matrix';
 import { MarketMatrixV2 } from '@/components/market-matrix-v2';
 import { FeedPreview } from '@/components/feed-preview';
 import { TranslationsManager } from '@/components/translations-manager';
+import { ContentManager } from '@/components/content-manager';
 import { HistoryView } from '@/components/history-view';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useBriefingStore } from '@/lib/store';
 import { useUserStore } from '@/lib/user-store';
 import { saveBrief } from '@/lib/storage';
@@ -24,6 +25,8 @@ import { TraffickingManager } from '@/components/trafficking-manager';
 import { VersionHistory } from '@/components/briefing/version-history';
 import { BriefVersion } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { getBrands, getAsset } from '@/lib/brand-storage';
+import { Brand, BrandAsset } from '@/lib/types';
 
 import {
     AlertDialog,
@@ -44,6 +47,8 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
     const { inputs, creative, translations, matrix, lockedFields, namingConvention, psdTemplates, psdTemplateId, loadBrief, setNamingConvention, reset } = useBriefingStore();
     const [isSaving, setIsSaving] = React.useState(false);
     const [conflictDialog, setConflictDialog] = React.useState<{ isOpen: boolean, briefConvention?: NamingConvention, activeConvention?: NamingConvention } | null>(null);
+    const [activeBrand, setActiveBrand] = React.useState<Brand | null>(null);
+    const [brandFonts, setBrandFonts] = React.useState<BrandAsset[]>([]);
     const { t } = useTranslation();
     const { currentUser } = useUserStore();
 
@@ -51,6 +56,7 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
     const allTabs = React.useMemo(() => [
         { value: "details", label: t.tabs.details, roles: ['admin', 'editor', 'content', 'design', 'market_manager', 'traffic', 'reviewer'] },
         { value: "matrix_v2", label: "Market Mix", roles: ['admin', 'editor', 'market_manager'] },
+        { value: "setup", label: "Content Setup", roles: ['admin', 'editor', 'content'] },
         { value: "content", label: t.tabs.content, roles: ['admin', 'editor', 'content'] },
         { value: "translations", label: t.tabs.translations, roles: ['admin', 'editor', 'content', 'market_manager'] },
         { value: "feed", label: "Feeds", roles: ['admin', 'editor', 'content', 'design', 'market_manager', 'reviewer'] },
@@ -94,7 +100,8 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
                         namingConvention: briefState.namingConvention,
                         psdTemplates: briefState.psdTemplates,
                         psdTemplateId: briefState.psdTemplateId,
-                        trafficking: briefState.trafficking
+                        trafficking: briefState.trafficking,
+                        content: briefState.content
                     };
 
                     // Conflict Detection
@@ -161,6 +168,38 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
         fetchBrief();
     }, [briefId, loadBrief, reset]);
 
+    // Brand Asset Loading
+    React.useEffect(() => {
+        const brandName = inputs.brand;
+        if (!brandName) {
+            setActiveBrand(null);
+            setBrandFonts([]);
+            return;
+        }
+
+        getBrands().then(async (brands) => {
+            const match = brands.find(b => b.name.toLowerCase() === brandName.toLowerCase());
+            if (match) {
+                setActiveBrand(match);
+                // Load Fonts
+                const fontIds = [match.fontIds.heading, match.fontIds.body].filter((id): id is string => !!id);
+                if (fontIds.length > 0) {
+                    try {
+                        const fonts = await Promise.all(fontIds.map(id => getAsset(id)));
+                        setBrandFonts(fonts.filter((f): f is BrandAsset => !!f && f.type === 'font'));
+                    } catch (e) {
+                        console.error("Error loading brand fonts", e);
+                    }
+                } else {
+                    setBrandFonts([]);
+                }
+            } else {
+                setActiveBrand(null);
+                setBrandFonts([]);
+            }
+        });
+    }, [inputs.brand]);
+
     const handleSave = async () => {
         setIsSaving(true);
         // Save text library content automatically
@@ -177,7 +216,8 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
             namingConvention,
             psdTemplates,
             psdTemplateId,
-            trafficking: useBriefingStore.getState().trafficking
+            trafficking: useBriefingStore.getState().trafficking,
+            content: useBriefingStore.getState().content
         };
 
         const savedId = await saveBrief(stateToSave, briefId === 'new' ? undefined : briefId);
@@ -201,7 +241,8 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
             namingConvention: state.namingConvention,
             psdTemplates: state.psdTemplates,
             psdTemplateId: state.psdTemplateId,
-            trafficking: state.trafficking
+            trafficking: state.trafficking,
+            content: state.content
         });
     };
 
@@ -225,12 +266,22 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
             namingConvention,
             psdTemplateId: useBriefingStore.getState().psdTemplateId,
             psdTemplates: psdTemplates,
-            trafficking: useBriefingStore.getState().trafficking
+            trafficking: useBriefingStore.getState().trafficking,
+            content: useBriefingStore.getState().content
         }
     }), [briefId, inputs, creative, translations, matrix, lockedFields, namingConvention, psdTemplates]);
 
     return (
         <div className="min-h-screen w-full bg-background text-foreground transition-colors duration-300">
+            {/* Inject Brand Fonts Globally */}
+            {brandFonts && brandFonts.length > 0 && (
+                <style>{brandFonts.map(font => `
+                    @font-face {
+                        font-family: '${font.name.split('.')[0]}';
+                        src: url('${font.data}');
+                    }
+                `).join('\n')}</style>
+            )}
             {/* Version Conflict Dialog */}
             <AlertDialog open={!!conflictDialog?.isOpen} onOpenChange={(open: boolean) => !open && setConflictDialog(null)}>
                 <AlertDialogContent>
@@ -320,6 +371,10 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
                             <MarketMatrix />
                         </TabsContent>
 
+                        <TabsContent value="setup" className="focus-visible:outline-none">
+                            <ContentManager />
+                        </TabsContent>
+
                         <TabsContent value="content" className="focus-visible:outline-none">
                             <ContentForm />
                         </TabsContent>
@@ -343,7 +398,7 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
                         <TabsContent value="editor" className="focus-visible:outline-none">
                             {/* Only render editor if we have a valid brief ID, otherwise show placeholder */}
                             {briefId && briefId !== 'new' ? (
-                                <IntegratedEditor briefId={briefId} brief={currentBrief} />
+                                <IntegratedEditor briefId={briefId} brief={currentBrief} brandFonts={brandFonts} activeBrand={activeBrand} />
                             ) : (
                                 <div className="h-[500px] flex flex-col items-center justify-center border-2 border-dashed border-border radius-card bg-muted/30 text-muted-foreground p-12 text-center space-y-4">
                                     <div className="w-16 h-16 radius-btn bg-background flex items-center justify-center shadow-sm">
@@ -363,7 +418,7 @@ export function BriefingBuilder({ briefId }: { briefId?: string }) {
 
                         <TabsContent value="export" className="focus-visible:outline-none">
                             {briefId && briefId !== 'new' ? (
-                                <ExportPage brief={currentBrief} />
+                                <ExportPage brief={currentBrief} brandFonts={brandFonts} />
                             ) : (
                                 <div className="h-[500px] flex flex-col items-center justify-center border-2 border-dashed border-border radius-card bg-muted/30 text-muted-foreground p-12 text-center space-y-4">
                                     <div className="w-16 h-16 radius-btn bg-background flex items-center justify-center shadow-sm">

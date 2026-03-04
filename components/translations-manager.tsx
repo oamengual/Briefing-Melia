@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
@@ -19,12 +20,13 @@ import {
     Languages,
     Megaphone,
     LayoutTemplate,
-    Mail
+    Mail,
+    FileText
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export function TranslationsManager() {
-    const { inputs, creative, translations, matrix, setTranslation, lockedFields } = useBriefingStore();
+    const { inputs, creative, translations, matrix, setTranslation, lockedFields, content } = useBriefingStore();
     const { t } = useTranslation();
     const masterLang = inputs.defaultLanguage || 'en';
 
@@ -102,7 +104,47 @@ export function TranslationsManager() {
             checkField(creative.newsletter.cta, translations[lang]?.newsletter?.cta);
         }
 
+        // Content
+        ['mainMessage', 'considerations', 'legalTexts'].forEach(key => {
+            const field = content[key as keyof typeof content] as any;
+            if (field?.defaultText) {
+                checkField(field.defaultText, (translations[lang]?.content as any)?.[key]?.defaultText);
+            }
+            // Check exceptions applicable to this language
+            if (field?.exceptions) {
+                field.exceptions.forEach((exc: any) => {
+                    const excMarkets = exc.markets || [];
+                    const appliesToLang = activeMarketSelectors.some(sel => {
+                        let lookupSelector = sel;
+                        if (sel.startsWith('ZH')) lookupSelector = 'CN (China)';
+                        const m = MARKETS.find(m => m.selector === lookupSelector);
+                        if (!m || !excMarkets.includes(m.code)) return false;
+                        return m.defaultLang === lang;
+                    });
+                    if (appliesToLang && exc.text) {
+                        checkField(exc.text, (translations[lang]?.content as any)?.[key]?.exceptions?.[exc.id]);
+                    }
+                });
+            }
+        });
+
         return total === 0 ? 100 : Math.round((completed / total) * 100);
+    };
+
+    // Helper for deeply nested state
+    const getNestedValue = (obj: any, path: string[]): any => {
+        return path.reduce((acc, part) => acc && acc[part], obj);
+    };
+
+    const setNestedValue = (obj: any, path: string[], value: any): any => {
+        const newObj = { ...obj };
+        let current = newObj;
+        for (let i = 0; i < path.length - 1; i++) {
+            current[path[i]] = { ...current[path[i]] };
+            current = current[path[i]];
+        }
+        current[path[path.length - 1]] = value;
+        return newObj;
     };
 
     const handleAutoTranslate = async (targetLang?: string) => {
@@ -112,9 +154,9 @@ export function TranslationsManager() {
         try {
             const promises: Promise<void>[] = [];
             for (const lang of langsToProcess) {
-                const newValues: Partial<CreativeInputs> = { ...translations[lang] };
-                if (!newValues.landing) newValues.landing = {} as any;
-                if (!newValues.newsletter) newValues.newsletter = {} as any;
+                const newValues: any = { ...translations[lang] };
+                if (!newValues.landing) newValues.landing = {};
+                if (!newValues.newsletter) newValues.newsletter = {};
 
                 let hasUpdates = false;
 
@@ -127,11 +169,12 @@ export function TranslationsManager() {
                         });
                         const data = await response.json();
                         if (data.translatedText) {
-                            if (path.length === 1) {
-                                (newValues as any)[path[0]] = data.translatedText;
-                            } else if (path.length === 2) {
-                                (newValues as any)[path[0]][path[1]] = data.translatedText;
+                            let current = newValues;
+                            for (let i = 0; i < path.length - 1; i++) {
+                                if (!current[path[i]]) current[path[i]] = {};
+                                current = current[path[i]];
                             }
+                            current[path[path.length - 1]] = data.translatedText;
                             hasUpdates = true;
                         }
                     } catch (e) { console.error(e) }
@@ -162,6 +205,29 @@ export function TranslationsManager() {
                         if (n.header && !newValues.newsletter?.header) await translateField(n.header, ['newsletter', 'header']);
                         if (n.body && !newValues.newsletter?.body) await translateField(n.body, ['newsletter', 'body']);
                         if (n.cta && !newValues.newsletter?.cta) await translateField(n.cta, ['newsletter', 'cta']);
+                    }
+
+                    // Content
+                    if (!newValues.content) newValues.content = {};
+                    for (const key of ['mainMessage', 'considerations', 'legalTexts']) {
+                        const field = content[key as keyof typeof content] as any;
+                        if (field?.defaultText && !(newValues.content as any)[key]?.defaultText) {
+                            await translateField(field.defaultText, ['content', key, 'defaultText']);
+                        }
+
+                        if (field?.exceptions) {
+                            for (const exc of field.exceptions) {
+                                const appliesToLang = activeMarketSelectors.some(sel => {
+                                    const lookupSelector = sel.startsWith('ZH') ? 'CN (China)' : sel;
+                                    const m = MARKETS.find(m => m.selector === lookupSelector);
+                                    if (!m || !(exc.markets || []).includes(m.code)) return false;
+                                    return m.defaultLang === lang;
+                                });
+                                if (appliesToLang && exc.text && !(newValues.content as any)[key]?.exceptions?.[exc.id]) {
+                                    await translateField(exc.text, ['content', key, 'exceptions', exc.id]);
+                                }
+                            }
+                        }
                     }
 
                     if (hasUpdates) setTranslation(lang, newValues);
@@ -195,9 +261,7 @@ export function TranslationsManager() {
         return (
             <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
                 {validFields.map((field) => {
-                    const currentVal = field.transPath.length === 1
-                        ? translations[activeLang!]?.[field.transPath[0] as keyof CreativeInputs]
-                        : (translations[activeLang!] as any)?.[field.transPath[0]]?.[field.transPath[1]];
+                    const currentVal = getNestedValue(translations[activeLang!], field.transPath);
 
                     const isTranslated = !!currentVal;
 
@@ -220,30 +284,43 @@ export function TranslationsManager() {
                                 </div>
 
                                 <div className="relative">
-                                    <div className="absolute left-3 top-3 text-muted-foreground/30">
-                                        <CornerDownIcon />
-                                    </div>
-                                    <Textarea
-                                        value={currentVal || ''}
-                                        onChange={(e) => {
-                                            const val = e.target.value;
-                                            const newTrans = { ...translations[activeLang!] };
-                                            if (field.transPath.length === 1) {
-                                                (newTrans as any)[field.transPath[0]] = val;
-                                            } else {
-                                                if (!(newTrans as any)[field.transPath[0]]) (newTrans as any)[field.transPath[0]] = {};
-                                                (newTrans as any)[field.transPath[0]][field.transPath[1]] = val;
-                                            }
-                                            setTranslation(activeLang!, newTrans);
-                                        }}
-                                        placeholder={`Translate to ${activeLang}...`}
-                                        className={cn(
-                                            "min-h-[80px] pl-8 resize-none transition-all",
-                                            isTranslated
-                                                ? "bg-muted/10 border-border focus:bg-background focus:border-primary"
-                                                : "bg-amber-50/50 dark:bg-amber-950/10 border-amber-200/50 dark:border-amber-800/30 focus:border-amber-500"
-                                        )}
-                                    />
+                                    {field.transPath[0] === 'content' ? (
+                                        <RichTextEditor
+                                            value={currentVal || ''}
+                                            onChange={(html) => {
+                                                const newTrans = setNestedValue(translations[activeLang!] || {}, field.transPath, html);
+                                                setTranslation(activeLang!, newTrans);
+                                            }}
+                                            placeholder={`Translate to ${activeLang}...`}
+                                            className={cn(
+                                                "min-h-[80px] transition-all",
+                                                isTranslated
+                                                    ? "bg-muted/10 border-border"
+                                                    : "bg-amber-50/50 dark:bg-amber-950/10 border-amber-200/50 dark:border-amber-800/30"
+                                            )}
+                                        />
+                                    ) : (
+                                        <>
+                                            <div className="absolute left-3 top-3 text-muted-foreground/30">
+                                                <CornerDownIcon />
+                                            </div>
+                                            <Textarea
+                                                value={currentVal || ''}
+                                                onChange={(e) => {
+                                                    const val = e.target.value;
+                                                    const newTrans = setNestedValue(translations[activeLang!] || {}, field.transPath, val);
+                                                    setTranslation(activeLang!, newTrans);
+                                                }}
+                                                placeholder={`Translate to ${activeLang}...`}
+                                                className={cn(
+                                                    "min-h-[80px] pl-8 resize-none transition-all",
+                                                    isTranslated
+                                                        ? "bg-muted/10 border-border focus:bg-background focus:border-primary"
+                                                        : "bg-amber-50/50 dark:bg-amber-950/10 border-amber-200/50 dark:border-amber-800/30 focus:border-amber-500"
+                                                )}
+                                            />
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -400,6 +477,9 @@ export function TranslationsManager() {
                                             <TabsTrigger value="newsletter" className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide px-4" disabled={!creative.newsletter}>
                                                 <Mail className="w-3.5 h-3.5" /> Newsletter
                                             </TabsTrigger>
+                                            <TabsTrigger value="content" className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide px-4">
+                                                <FileText className="w-3.5 h-3.5" /> Content Texts
+                                            </TabsTrigger>
                                         </TabsList>
                                     </div>
 
@@ -433,6 +513,52 @@ export function TranslationsManager() {
                                                     { key: 'n_body', label: 'Body Copy', value: creative.newsletter.body, transPath: ['newsletter', 'body'] },
                                                     { key: 'n_cta', label: 'Button CTA', value: creative.newsletter.cta, transPath: ['newsletter', 'cta'] },
                                                 ])}
+                                            </TabsContent>
+
+                                            <TabsContent value="content" className="mt-0 focus-visible:outline-none space-y-8">
+                                                {['mainMessage', 'considerations', 'legalTexts'].map(contentKey => {
+                                                    const fieldData = (content as any)[contentKey];
+                                                    const fieldsToRender: any[] = [];
+
+                                                    if (fieldData?.defaultText) {
+                                                        fieldsToRender.push({
+                                                            key: `${contentKey}_default`,
+                                                            label: 'Default Text',
+                                                            value: fieldData.defaultText,
+                                                            transPath: ['content', contentKey, 'defaultText']
+                                                        });
+                                                    }
+
+                                                    if (fieldData?.exceptions) {
+                                                        fieldData.exceptions.forEach((exc: any) => {
+                                                            const appliesToLang = activeMarketSelectors.some(sel => {
+                                                                const lookupSelector = sel.startsWith('ZH') ? 'CN (China)' : sel;
+                                                                const m = MARKETS.find(m => m.selector === lookupSelector);
+                                                                if (!m || !(exc.markets || []).includes(m.code)) return false;
+                                                                return m.defaultLang === activeLang;
+                                                            });
+
+                                                            if (appliesToLang && exc.text) {
+                                                                fieldsToRender.push({
+                                                                    key: `${contentKey}_exc_${exc.id}`,
+                                                                    label: `Exception (${exc.markets.join(', ')})`,
+                                                                    value: exc.text,
+                                                                    transPath: ['content', contentKey, 'exceptions', exc.id]
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+
+                                                    let title = "Main Message";
+                                                    if (contentKey === 'considerations') title = "Considerations";
+                                                    if (contentKey === 'legalTexts') title = "Legal Texts";
+
+                                                    return (
+                                                        <div key={contentKey}>
+                                                            {renderFieldGroup(title, <FileText className="w-4 h-4 text-primary" />, fieldsToRender)}
+                                                        </div>
+                                                    );
+                                                })}
                                             </TabsContent>
                                         </div>
                                     </ScrollArea>

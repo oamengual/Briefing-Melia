@@ -11,7 +11,7 @@ import { MARKETS, PLACEMENTS as SEED_PLACEMENTS } from '@/lib/constants';
 import { getPlacements } from '@/lib/storage';
 import { Brief, Market, Placement, EditorState, PsdTemplate } from '@/lib/types';
 
-export function ExportPage({ brief }: { brief: Brief }) {
+export function ExportPage({ brief, brandFonts = [] }: { brief: Brief, brandFonts?: any[] }) {
     const { psdTemplates } = useBriefingStore();
     const { setFeedData } = useEditorStore();
     const [hydratedTemplates, setHydratedTemplates] = React.useState<PsdTemplate[]>([]);

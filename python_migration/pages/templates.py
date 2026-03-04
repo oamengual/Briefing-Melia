@@ -6,15 +6,15 @@ from theme import THEME
 def templates_page():
     with layout_wrapper():
         # Header Section
-        with ui.row().classes('w-full items-center justify-between p-8 border-b border-zinc-800 bg-[#09090b]'):
+        with ui.row().classes('w-full items-center justify-between p-8 border-b border-slate-200 bg-white'):
             with ui.column().classes('gap-1'):
-                ui.label('Campaign Templates').classes('text-3xl font-bold tracking-tight')
-                ui.label('Accelerate your workflow with pre-configured placement mixes and strategies.').classes('text-base text-zinc-500')
+                ui.label('Campaign Templates').classes('text-3xl font-bold tracking-tight text-slate-900')
+                ui.label('Accelerate your workflow with pre-configured placement mixes and strategies.').classes('text-base text-slate-500')
 
         # Content Area
         with ui.column().classes('w-full max-w-6xl mx-auto p-8 gap-10'):
             # Categories / Tabs
-            with ui.tabs().classes('w-full bg-transparent border-b border-zinc-800') as tabs:
+            with ui.tabs().classes('w-full bg-transparent border-b border-slate-200 text-slate-500') as tabs:
                 ui.tab('All').classes('text-sm font-bold uppercase tracking-widest')
                 ui.tab('Market').classes('text-sm font-bold uppercase tracking-widest')
                 ui.tab('Region').classes('text-sm font-bold uppercase tracking-widest')
@@ -32,16 +32,16 @@ def templates_page():
                             ('Perf. Marketing', 'Objective', 'High-conversion objective focus.', ['DR', 'Growth']),
                         ]
                         for name, cat, desc, tags in templates:
-                            with ui.card().classes('h-full bg-[#1C1C21] border-[#212126] hover:border-[#e4002b] transition-all duration-300 p-6 rounded-xl shadow-card group flex flex-col'):
+                            with ui.card().classes('h-full bg-white border border-slate-200 hover:border-red-200 transition-all duration-300 p-6 rounded-xl shadow-sm group flex flex-col'):
                                 # Category Badge
-                                ui.badge(cat, color='zinc-800').classes('text-[9px] font-black uppercase px-2 mb-4 w-fit')
+                                ui.badge(cat, color='slate-50').classes('text-[9px] font-black uppercase px-2 mb-4 w-fit text-slate-500')
                                 
-                                ui.label(name).classes('text-lg font-bold group-hover:text-[#e4002b] transition-colors leading-tight mb-2')
-                                ui.label(desc).classes('text-xs text-zinc-500 line-clamp-2 leading-relaxed mb-6')
+                                ui.label(name).classes('text-lg font-bold text-slate-900 group-hover:text-primary transition-colors leading-tight mb-2')
+                                ui.label(desc).classes('text-xs text-slate-500 line-clamp-2 leading-relaxed mb-6')
                                 
                                 # Tags
                                 with ui.row().classes('gap-1 mb-6'):
                                     for tag in tags:
-                                        ui.badge(tag, color='zinc-900').classes('text-[8px] font-bold text-zinc-500 px-1.5')
+                                        ui.badge(tag, color='slate-50').classes('text-[8px] font-bold text-slate-400 px-1.5')
                                 
-                                ui.button('Use Template', icon='arrow_forward').props('flat').classes('w-full mt-auto radius-btn font-bold text-xs h-9 bg-zinc-800 hover:bg-[#e4002b] hover:text-white transition-colors')
+                                ui.button('Use Template', icon='arrow_forward').props('flat').classes('w-full mt-auto radius-btn font-bold text-xs h-9 bg-slate-50 text-slate-600 hover:bg-red-500 hover:text-white transition-colors')

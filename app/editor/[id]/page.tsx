@@ -6,7 +6,8 @@ import { useEditorStore } from '@/lib/editor-store';
 import { getBrief } from '@/lib/storage';
 import { getPsd, savePsd } from '@/lib/psd-storage';
 import { parsePsd } from '@/lib/psd-utils';
-import { EditorState } from '@/lib/types';
+import { EditorState, Brand, BrandAsset } from '@/lib/types';
+import { getBrands, getAsset } from '@/lib/brand-storage';
 
 import { PsdUploader } from '@/components/editor/psd-uploader';
 import { EditorCanvas } from '@/components/editor/canvas';
@@ -37,6 +38,8 @@ export default function EditorPage() {
     const [briefName, setBriefName] = React.useState('');
     const [briefPsdTemplates, setBriefPsdTemplates] = React.useState<{ id: string; name: string; size: string; preview?: string }[]>([]);
     const [activeTemplateId, setActiveTemplateId] = React.useState<string | undefined>();
+    const [activeBrand, setActiveBrand] = React.useState<Brand | null>(null);
+    const [brandFonts, setBrandFonts] = React.useState<BrandAsset[]>([]);
 
     const briefId = params.id as string;
 
@@ -138,6 +141,26 @@ export default function EditorPage() {
             }
 
             setLoading(false);
+
+            // 3. Load Brand Assets
+            const brandName = brief.state.inputs.brand;
+            if (brandName) {
+                getBrands().then(async (brands) => {
+                    const match = brands.find(b => b.name.toLowerCase() === brandName.toLowerCase());
+                    if (match) {
+                        setActiveBrand(match);
+                        const fontIds = [match.fontIds.heading, match.fontIds.body].filter((id): id is string => !!id);
+                        if (fontIds.length > 0) {
+                            try {
+                                const fonts = await Promise.all(fontIds.map(id => getAsset(id)));
+                                setBrandFonts(fonts.filter((f): f is BrandAsset => !!f && f.type === 'font'));
+                            } catch (e) {
+                                console.error("Error loading brand fonts", e);
+                            }
+                        }
+                    }
+                });
+            }
         };
 
         loadData();
@@ -310,6 +333,15 @@ export default function EditorPage() {
 
     return (
         <div className="flex flex-col h-screen w-screen bg-background text-foreground overflow-hidden font-sans text-xs select-none">
+            {/* Inject Brand Fonts Globally */}
+            {brandFonts && brandFonts.length > 0 && (
+                <style>{brandFonts.map(font => `
+                    @font-face {
+                        font-family: '${font.name.split('.')[0]}';
+                        src: url('${font.data}');
+                    }
+                `).join('\n')}</style>
+            )}
 
             {/* 1. TOP MENU BAR */}
             <header className="h-10 bg-sidebar border-b border-sidebar-border flex items-center px-2 gap-2 shadow-sm shrink-0">
@@ -433,7 +465,7 @@ export default function EditorPage() {
                             <Settings className="w-3 h-3" /> PROPERTIES
                         </div>
                         <div className="flex-1 overflow-y-auto p-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-muted [&::-webkit-scrollbar-track]:bg-transparent">
-                            <PropertiesPanel />
+                            <PropertiesPanel brand={activeBrand} brandFonts={brandFonts} />
                         </div>
                     </div>
                 </aside>

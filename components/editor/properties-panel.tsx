@@ -144,15 +144,7 @@ export function PropertiesPanel({ brand, brandFonts }: PropertiesPanelProps) {
 
 
 
-            {/* Inject Brand Fonts */}
-            {brandFonts && brandFonts.length > 0 && (
-                <style>{brandFonts.map(font => `
-                    @font-face {
-                        font-family: '${font.name.split('.')[0]}';
-                        src: url('${font.data}');
-                    }
-                `).join('\n')}</style>
-            )}
+
 
             {/* Layout Section */}
             <div>

@@ -1,0 +1,49 @@
+{
+  "id": "ad409ea9-336f-48df-94c2-44586bd22ea3",
+  "updated_at": 1771532893.3723352,
+  "details": {
+    "campaignName": "Persistence Test 1",
+    "brand": "",
+    "agency": "",
+    "startDate": "",
+    "endDate": "",
+    "marketingObjective": "awareness",
+    "kpi": "",
+    "strategy": "",
+    "landingPageUrl": "",
+    "defaultLanguage": "en",
+    "regions": [
+      "EMEA",
+      "APAC",
+      "AME"
+    ]
+  },
+  "matrix": {},
+  "selected_markets": [],
+  "creative": {
+    "claim": "",
+    "cta": "",
+    "discount": "",
+    "usp1": "",
+    "usp2": "",
+    "usp3": ""
+  },
+  "landing": {
+    "title": "",
+    "subtitle": "",
+    "body": "",
+    "cta": ""
+  },
+  "newsletter": {
+    "subject": "",
+    "preview": "",
+    "header": "",
+    "body": "",
+    "cta": ""
+  },
+  "locked_fields": [],
+  "translations": {},
+  "trafficking": {},
+  "psd_templates": [],
+  "status": "draft"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "5c03a953-d608-4f94-be41-c1538032f5cb",
+  "updated_at": 1771535472.6021912,
+  "details": {
+    "campaignName": "Campaign Test v1",
+    "brand": "RIU Hotels & Resorts",
+    "agency": "Inhouse",
+    "startDate": "",
+    "endDate": "",
+    "marketingObjective": "conversion",
+    "kpi": "",
+    "strategy": "",
+    "landingPageUrl": "",
+    "defaultLanguage": "en",
+    "regions": [
+      "EMEA"
+    ]
+  },
+  "matrix": {},
+  "selected_markets": [],
+  "creative": {
+    "claim": "",
+    "cta": "",
+    "discount": "",
+    "usp1": "",
+    "usp2": "",
+    "usp3": ""
+  },
+  "landing": {
+    "title": "",
+    "subtitle": "",
+    "body": "",
+    "cta": ""
+  },
+  "newsletter": {
+    "subject": "",
+    "preview": "",
+    "header": "",
+    "body": "",
+    "cta": ""
+  },
+  "locked_fields": [],
+  "translations": {},
+  "trafficking": {},
+  "psd_templates": [],
+  "status": "draft"
+}

@@ -103,6 +103,72 @@ export interface PsdTemplate {
     editorState?: EditorState;
 }
 
+export interface LocalizedException {
+    id: string;
+    text: string;
+    markets: string[];
+}
+
+export interface LocalizedField {
+    defaultText: string;
+    exceptions: LocalizedException[]; // Array of exceptions to allow one text for multiple markets
+}
+
+export interface TranslatedContentField {
+    defaultText?: string;
+    exceptions?: Record<string, string>; // Exception ID -> Translated Text
+}
+
+export interface TranslatedContent {
+    mainMessage?: TranslatedContentField;
+    considerations?: TranslatedContentField;
+    legalTexts?: TranslatedContentField;
+}
+
+export interface BriefTranslation extends Partial<CreativeInputs> {
+    content?: TranslatedContent;
+}
+
+export interface MarketContentSettings {
+    addTransferLink: boolean;
+    addRiuClassLink: boolean;
+    excludeGaroe: boolean;
+    excludeFlightHotel: boolean;
+    excludePlazaHotels: boolean;
+
+    locations: {
+        landing: boolean;
+        newsletterB2C: boolean;
+        newsletterRC: boolean;
+        lastMinuteNewsletterB2C: boolean;
+        lastMinuteNewsletterRC: boolean;
+        pushB2C: boolean;
+        pushRC: boolean;
+        lastMinutePushB2C: boolean;
+        lastMinutePushRC: boolean;
+    };
+}
+
+export interface LandingMarketConfig {
+    url: string;
+    updateDate: string;
+    hasFastbooking: boolean;
+    hotelsToShow: string;
+    showPromoCode: boolean;
+    promoCodeText: string;
+    hasCountdown: boolean;
+    countdownDate: string;
+}
+
+export interface ContentConfig {
+    mainMessage: LocalizedField;
+    considerations: LocalizedField;
+    legalTexts: LocalizedField;
+    marketSettings: Record<string, MarketContentSettings>;
+    landingConfig: Record<string, LandingMarketConfig>;
+}
+
+
 export interface Brief {
     id: string;
     name: string; // Campaign Name
@@ -111,12 +177,13 @@ export interface Brief {
     state: {
         inputs: CampaignInputs;
         creative: CreativeInputs;
-        translations: Record<string, Partial<CreativeInputs>>;
+        translations: Record<string, BriefTranslation>;
         matrix: MatrixState;
         lockedFields?: string[];
         namingConvention?: NamingConvention;
         psdTemplateId?: string;
         psdTemplates?: PsdTemplate[];
         trafficking?: Record<string, TraffickingData>;
+        content?: ContentConfig;
     }
 }
