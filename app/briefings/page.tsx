@@ -132,7 +132,7 @@ export default function BriefingsPage() {
         return result.sort((a, b) => {
             if (sortBy === 'name') return a.name.localeCompare(b.name);
             if (sortBy === 'assets') return getBriefAssetCount(b) - getBriefAssetCount(a);
-            return b.updatedAt - a.updatedAt; // Default: Newest first
+            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(); // Default: Newest first
         });
     }, [briefs, searchQuery, statusFilter, sortBy]);
 

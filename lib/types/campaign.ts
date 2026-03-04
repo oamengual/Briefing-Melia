@@ -172,7 +172,8 @@ export interface ContentConfig {
 export interface Brief {
     id: string;
     name: string; // Campaign Name
-    updatedAt: number;
+    createdAt?: string | number;
+    updatedAt: number | string;
     status?: 'draft' | 'review' | 'approved' | 'completed';
     state: {
         inputs: CampaignInputs;
