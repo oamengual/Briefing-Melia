@@ -1,9 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { Check, Download, Loader2, Palette } from 'lucide-react';
+import { Check, Download, Loader2, Palette, Database } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { Template } from './types';
 
@@ -18,6 +19,7 @@ interface ExportSidebarProps {
     canExport: boolean;
     totalAssets: number;
     onLaunchDashboard: () => void;
+    onSalesforceExport: () => void;
 }
 
 export function ExportSidebar({
@@ -30,7 +32,8 @@ export function ExportSidebar({
     onExport,
     canExport,
     totalAssets,
-    onLaunchDashboard
+    onLaunchDashboard,
+    onSalesforceExport
 }: ExportSidebarProps) {
     const allSelected = selectedTemplateIds.size === templates.length;
 
@@ -121,7 +124,6 @@ export function ExportSidebar({
                         ));
                     })()}
 
-                    {/* Export Action at the end of the scroll area */}
                     <div className="pt-4 pb-8">
                         {isExporting ? (
                             <div className="w-full bg-secondary-container/50 rounded-xl p-4 border border-border shadow-inner">
@@ -146,6 +148,7 @@ export function ExportSidebar({
                             </Button>
                         )}
                     </div>
+
                 </div>
             </ScrollArea>
         </div>

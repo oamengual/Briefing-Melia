@@ -10,6 +10,7 @@ export interface CampaignInputs {
     month: string;
     agency: string;
     regions: string[];
+    selectedMarkets?: string[]; // Array of market selectors
     activationDate?: string;
     deliveryDate?: string;
 
@@ -22,7 +23,13 @@ export interface CampaignInputs {
     marketingObjective?: string; // Awareness, Traffic, Conversion
     kpi?: string;
     targetAudience?: string;
+    target?: string; // Specific field requested
+    classification?: 'vac' | 'plaza' | 'mixta' | 'paquetes' | 'otros';
+    hasLocalAdaptations?: boolean;
+    hasNewsletterLastMinute?: boolean;
     landingPageUrl?: string;
+    visualReferences?: string; // URLs or descriptions
+    visualReferenceImages?: string[]; // Array of base64 images
     assignedTo?: string; // User ID
 }
 

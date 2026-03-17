@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge';
 
 export function FeedPreview() {
     const { matrix, inputs, creative, translations, namingConvention, content } = useBriefingStore();
-    const [activeTab, setActiveTab] = React.useState<'media' | 'creative'>('creative');
+    const [activeTab, setActiveTab] = React.useState<'media' | 'creative' | 'salesforce'>('creative');
 
     // Dynamic Placements
     const [placements, setPlacements] = React.useState<Placement[]>(SEED_PLACEMENTS);
@@ -187,6 +187,42 @@ export function FeedPreview() {
         return result;
     }, [matrix, inputs]);
 
+    // Salesforce Rows
+    const salesforceRows = React.useMemo(() => {
+        const result: any[] = [];
+        Object.entries(matrix).forEach(([marketSelector, placementIds]) => {
+            if (!placementIds || placementIds.length === 0) return;
+
+            let lookupSelector = marketSelector;
+            if (marketSelector.startsWith('ZH')) lookupSelector = 'CN (China)';
+
+            const market = MARKETS.find((m) => m.selector === lookupSelector);
+            if (!market) return;
+
+            if (inputs.regions && !inputs.regions.includes(market.region)) return;
+
+            const lang = market.defaultLang || 'en';
+            const translation = translations[lang] || {};
+            const content = resolveContent(market);
+
+            result.push({
+                campaign: inputs.campaignName || '',
+                market: market.code,
+                code: market.code,
+                lang: lang,
+                claim: content.claim,
+                discount: content.discount,
+                cta: content.cta,
+                usp1: content.usp1,
+                usp2: content.usp2,
+                usp3: content.usp3,
+                subject: translation.newsletter?.subject || creative.newsletter?.subject || '',
+                landingTitle: translation.landing?.title || creative.landing?.title || ''
+            });
+        });
+        return result;
+    }, [matrix, inputs, translations, creative, resolveContent]);
+
 
     // Determine which fields are active (non-empty across the dataset)
     const activeCreativeFields = React.useMemo(() => {
@@ -255,6 +291,32 @@ export function FeedPreview() {
         download(csvContent, `photoshop_content_${inputs.campaignName || 'draft'}.csv`);
     };
 
+    const downloadSalesforceCSV = () => {
+        if (salesforceRows.length === 0) return;
+        const headers = [
+            'Campaign_Name', 'Market', 'Language', 
+            'Claim', 'Discount', 'CTA', 'USP1', 'USP2', 'USP3', 
+            'Newsletter_Subject', 'Landing_Title'
+        ];
+        const csvContent = [
+            headers.join(','),
+            ...salesforceRows.map(row => [
+                `"${row.campaign}"`,
+                `"${row.market}"`,
+                `"${row.lang}"`,
+                `"${row.claim || ''}"`,
+                `"${row.discount || ''}"`,
+                `"${row.cta || ''}"`,
+                `"${row.usp1 || ''}"`,
+                `"${row.usp2 || ''}"`,
+                `"${row.usp3 || ''}"`,
+                `"${row.subject || ''}"`,
+                `"${row.landingTitle || ''}"`
+            ].join(','))
+        ].join('\n');
+        download(csvContent, `salesforce_feed_${inputs.campaignName || 'draft'}.csv`);
+    };
+
     const download = (content: string, filename: string) => {
         const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
@@ -266,9 +328,9 @@ export function FeedPreview() {
         document.body.removeChild(link);
     }
 
-    const currentRows = activeTab === 'media' ? mediaRows : creativeRows;
+    const currentRows = activeTab === 'media' ? mediaRows : (activeTab === 'creative' ? creativeRows : salesforceRows);
 
-    if (currentRows.length === 0 && mediaRows.length === 0) {
+    if (mediaRows.length === 0 && creativeRows.length === 0) {
         // Only show empty state if NOTHING selected at all.
         return (
             <Card className="w-full border-dashed shadow-none bg-muted/30 radius-card border border-border">
@@ -286,7 +348,11 @@ export function FeedPreview() {
                 <div className="space-y-1">
                     <h1 className="text-2xl font-bold text-foreground">Output Feeds</h1>
                     <p className="text-sm text-muted-foreground">
-                        Generated <span className="text-primary font-semibold">{currentRows.length} rows</span> for {activeTab === 'media' ? 'Media File Naming' : 'Photoshop Data'}.
+                        Generated <span className="text-primary font-semibold">{currentRows.length} rows</span> for {
+                            activeTab === 'media' ? 'Media File Naming' : 
+                            activeTab === 'creative' ? 'Photoshop Data' : 
+                            'Salesforce Feed'
+                        }.
                     </p>
                 </div>
 
@@ -299,7 +365,17 @@ export function FeedPreview() {
                         )}
                     >
                         <ImageIcon className="w-3.5 h-3.5" />
-                        Photoshop Content
+                        Photoshop
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('salesforce')}
+                        className={cn(
+                            "h-8 px-3 text-xs radius-btn transition-all flex items-center gap-2 font-medium",
+                            activeTab === 'salesforce' ? "bg-white text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground hover:bg-white/50"
+                        )}
+                    >
+                        <Database className="w-3.5 h-3.5" />
+                        Salesforce
                     </button>
                     <button
                         onClick={() => setActiveTab('media')}
@@ -309,7 +385,7 @@ export function FeedPreview() {
                         )}
                     >
                         <FileText className="w-3.5 h-3.5" />
-                        File Naming
+                        Naming
                     </button>
                 </div>
             </div>
@@ -327,7 +403,7 @@ export function FeedPreview() {
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Market</th>
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Size</th>
                                         </>
-                                    ) : (
+                                    ) : activeTab === 'creative' ? (
                                         <>
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Market-Lang</th>
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Claim</th>
@@ -339,6 +415,14 @@ export function FeedPreview() {
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Main Msg</th>
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Con.</th>
                                             <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Legal</th>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Market</th>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Language</th>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Claim</th>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Newsletter Sub.</th>
+                                            <th className="px-6 py-3 text-xs font-medium text-muted-foreground sticky top-0 bg-muted/50">Landing Title</th>
                                         </>
                                     )}
                                 </tr>
@@ -361,7 +445,7 @@ export function FeedPreview() {
                                             </td>
                                         </tr>
                                     ))
-                                ) : (
+                                ) : activeTab === 'creative' ? (
                                     creativeRows.map((row, i) => {
                                         const content = resolveContent(row.market);
                                         return (
@@ -384,6 +468,19 @@ export function FeedPreview() {
                                             </tr>
                                         )
                                     })
+                                ) : (
+                                    salesforceRows.map((row, i) => (
+                                        <tr key={i} className="hover:bg-muted/50 transition-colors group">
+                                            <td className="px-6 py-3 font-mono text-[11px] text-foreground select-all font-medium whitespace-nowrap">{row.campaign}</td>
+                                            <td className="px-6 py-3 text-xs font-semibold text-foreground">{row.market}</td>
+                                            <td className="px-6 py-3">
+                                                <Badge variant="outline" className="text-[10px] uppercase font-mono">{row.lang}</Badge>
+                                            </td>
+                                            <td className="px-6 py-3 text-xs text-muted-foreground truncate max-w-[200px]">{row.claim}</td>
+                                            <td className="px-6 py-3 text-xs text-muted-foreground truncate max-w-[200px]">{row.subject}</td>
+                                            <td className="px-6 py-3 text-xs text-muted-foreground truncate max-w-[200px]">{row.landingTitle}</td>
+                                        </tr>
+                                    ))
                                 )}
                             </tbody>
                         </table>
@@ -393,11 +490,19 @@ export function FeedPreview() {
                 <div className="p-4 border-t border-border bg-muted/20 flex justify-end">
                     <Button
                         size="sm"
-                        onClick={activeTab === 'media' ? downloadMediaCSV : downloadCreativeCSV}
+                        onClick={
+                            activeTab === 'media' ? downloadMediaCSV : 
+                            activeTab === 'creative' ? downloadCreativeCSV : 
+                            downloadSalesforceCSV
+                        }
                         className="radius-btn font-medium"
                     >
                         <Download className="w-4 h-4 mr-2" />
-                        Download {activeTab === 'media' ? 'Naming' : 'Photoshop'} CSV
+                        Download {
+                            activeTab === 'media' ? 'Naming' : 
+                            activeTab === 'creative' ? 'Photoshop' : 
+                            'Salesforce'
+                        } CSV
                     </Button>
                 </div>
             </Card>

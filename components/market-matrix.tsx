@@ -47,7 +47,12 @@ export function MarketMatrix() {
     }
 
     const handleRegionHeaderClick = (region: string) => {
-        const regionMarkets = MARKETS.filter(m => m.region === region);
+        const regionMarkets = MARKETS.filter(m => {
+            const matchesRegion = m.region === region;
+            const matchesSelected = !inputs.selectedMarkets || inputs.selectedMarkets.length === 0 || 
+                                   inputs.selectedMarkets.includes(m.selector);
+            return matchesRegion && matchesSelected;
+        });
         if (regionMarkets.length === 0) return;
 
         // Check overall state: if ALL markets in region are fully selected -> Deselect All. Otherwise -> Select All.
@@ -72,7 +77,12 @@ export function MarketMatrix() {
         // Identify all currently visible markets (columns)
         const visibleMarkets: Market[] = [];
         regions.forEach(region => {
-            const regionMarkets = MARKETS.filter(m => m.region === region);
+            const regionMarkets = MARKETS.filter(m => {
+                const matchesRegion = m.region === region;
+                const matchesSelected = !inputs.selectedMarkets || inputs.selectedMarkets.length === 0 || 
+                                       inputs.selectedMarkets.includes(m.selector);
+                return matchesRegion && matchesSelected;
+            });
             visibleMarkets.push(...regionMarkets);
         });
 
@@ -125,7 +135,12 @@ export function MarketMatrix() {
                                     <span className="text-lg">Placements</span>
                                 </th>
                                 {regions.map(region => {
-                                    const regionMarkets = MARKETS.filter(m => m.region === region);
+                                    const regionMarkets = MARKETS.filter(m => {
+                                        const matchesRegion = m.region === region;
+                                        const matchesSelected = !inputs.selectedMarkets || inputs.selectedMarkets.length === 0 || 
+                                                               inputs.selectedMarkets.includes(m.selector);
+                                        return matchesRegion && matchesSelected;
+                                    });
                                     const isCollapsed = collapsedRegions.includes(region);
                                     return (
                                         <th
@@ -216,7 +231,12 @@ export function MarketMatrix() {
                                             <td
                                                 colSpan={regions.reduce((acc, r) => {
                                                     const isCollapsed = collapsedRegions.includes(r);
-                                                    return acc + (isCollapsed ? 1 : MARKETS.filter(m => m.region === r).length);
+                                                    return acc + (isCollapsed ? 1 : MARKETS.filter(m => {
+                                                        const matchesRegion = m.region === r;
+                                                        const matchesSelected = !inputs.selectedMarkets || inputs.selectedMarkets.length === 0 || 
+                                                                               inputs.selectedMarkets.includes(m.selector);
+                                                        return matchesRegion && matchesSelected;
+                                                    }).length);
                                                 }, 0)}
                                                 className="bg-[#F7F7F7] border-b border-border/40 pointer-events-none"
                                             />
@@ -231,8 +251,16 @@ export function MarketMatrix() {
                                                         className="flex flex-col items-start text-left w-full group/btn transition-colors"
                                                     >
                                                         <span className="font-bold text-[#222222] text-sm group-hover/btn:text-[#FF385C] transition-colors mb-1">{placement.name}</span>
-                                                        <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide bg-[#F7F7F7] px-2 py-0.5 rounded-full border border-border/50">
-                                                            {placement.size} • {placement.format}
+                                                        <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide bg-[#F7F7F7] px-2 py-0.5 rounded-full border border-border/50 flex items-center gap-1.5 flex-wrap">
+                                                            <span>{placement.width}x{placement.height}</span>
+                                                            <span>•</span>
+                                                            <span>{placement.format}</span>
+                                                            {placement.maxFileSize && (
+                                                                <>
+                                                                    <span>•</span>
+                                                                    <span>{placement.maxFileSize >= 1024 ? `${(placement.maxFileSize / 1024).toFixed(0)}mb` : `${placement.maxFileSize}kb`}</span>
+                                                                </>
+                                                            )}
                                                         </span>
                                                     </button>
                                                 </th>
@@ -248,7 +276,12 @@ export function MarketMatrix() {
                                                         );
                                                     }
 
-                                                    const regionMarkets = MARKETS.filter(m => m.region === region);
+                                                    const regionMarkets = MARKETS.filter(m => {
+                                                        const matchesRegion = m.region === region;
+                                                        const matchesSelected = !inputs.selectedMarkets || inputs.selectedMarkets.length === 0 || 
+                                                                               inputs.selectedMarkets.includes(m.selector);
+                                                        return matchesRegion && matchesSelected;
+                                                    });
                                                     return regionMarkets.map(market => {
                                                         const isSelected = matrix[market.selector]?.includes(placement.id);
                                                         return (

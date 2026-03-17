@@ -58,7 +58,10 @@ export default function BriefingsPage() {
         const headers = ['Campaign ID', 'Name', 'Status', 'Updated', 'Markets', 'Total Assets'];
         const rows = briefs.map(b => {
             const matrix = b.state.matrix || {};
-            const markets = Object.keys(matrix).join('; ');
+            const markets = Object.keys(matrix).map(sel => {
+                const m = MARKETS.find(market => market.selector === sel);
+                return m ? m.name : sel;
+            }).join('; ');
             const assetCount = getBriefAssetCount(b);
             return [
                 b.id,

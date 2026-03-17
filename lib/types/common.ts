@@ -10,7 +10,7 @@ export interface Market {
 }
 
 export type Format = 'img' | 'vid' | 'html5';
-export type Channel = 'Web' | 'Newsletter' | 'App' | 'Paquetes' | 'Criteo RTG' | 'Criteo PROS' | 'Amazon DSP' | 'Taboola' | 'Demand Gen / TripMax' | 'YT / Demand Gen' | 'TikTok' | 'Smartly' | 'Meta';
+export type Channel = 'Google' | 'Amazon' | 'Tik Tok' | 'Meta' | 'Taboola' | 'Criteo RTG' | 'App' | 'Newsletter' | 'Web' | 'Paquetes' | 'YT / Demand Gen' | 'Expedia';
 
 export interface Placement {
   id: string;

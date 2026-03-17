@@ -43,12 +43,14 @@ export function MarketMatrixV2() {
         setPlacements(getPlacements());
     }, []);
 
-    // Filter markets by region and search query
+    // Filter markets by region, search query and selected markets
     const filteredMarkets = MARKETS.filter(m => {
         const matchesRegion = m.region === activeRegion && inputs.regions?.includes(m.region as any);
+        const matchesSelected = !inputs.selectedMarkets || inputs.selectedMarkets.length === 0 ||
+            inputs.selectedMarkets.includes(m.selector);
         const matchesSearch = m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             m.code.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesRegion && matchesSearch;
+        return matchesRegion && matchesSelected && matchesSearch;
     });
 
     // Group placements by channel
@@ -356,10 +358,17 @@ export function MarketMatrixV2() {
                                                                                     {isPlacementSelected && <Check className="w-2.5 h-2.5 text-background stroke-[3]" />}
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="flex items-center gap-1.5 mt-auto w-full">
+                                                                            <div className="flex flex-wrap items-center gap-1.5 mt-auto w-full">
                                                                                 <span className="text-[10px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-sm">
-                                                                                    {placement.size}
+                                                                                    {placement.width}x{placement.height}
                                                                                 </span>
+                                                                                {placement.maxFileSize && (
+                                                                                    <span className="text-[10px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-sm">
+                                                                                        {placement.maxFileSize >= 1024 
+                                                                                            ? `${(placement.maxFileSize / 1024).toFixed(0)}mb` 
+                                                                                            : `${placement.maxFileSize}kb`}
+                                                                                    </span>
+                                                                                )}
                                                                                 <span className={cn(
                                                                                     "text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm ml-auto",
                                                                                     placement.format === 'vid' ? "text-amber-700 bg-amber-50" : "text-blue-700 bg-blue-50"
