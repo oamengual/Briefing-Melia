@@ -19,7 +19,7 @@ interface ExportSidebarProps {
     canExport: boolean;
     totalAssets: number;
     onLaunchDashboard: () => void;
-    onSalesforceExport: () => void;
+    onClinchExport: () => void;
 }
 
 export function ExportSidebar({
@@ -33,7 +33,7 @@ export function ExportSidebar({
     canExport,
     totalAssets,
     onLaunchDashboard,
-    onSalesforceExport
+    onClinchExport
 }: ExportSidebarProps) {
     const allSelected = selectedTemplateIds.size === templates.length;
 

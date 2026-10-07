@@ -20,8 +20,8 @@
     --popover-foreground: 240 5% 9%;
     /* #131316 */
 
-    --primary: 349 100% 45%;
-    /* #e4002b */
+    --primary: 0 0% 15%;
+    /* Meliá Dark Slate */
     --primary-foreground: 0 0% 100%;
     /* #FFFFFF */
 
@@ -49,8 +49,8 @@
     /* #DFE1E6 */
     --input: 0 0% 100%;
     /* #FFFFFF */
-    --ring: 349 100% 45%;
-    /* #e4002b */
+    --ring: 0 0% 15%;
+    /* Meliá Dark Slate */
 
     --radius: 0.375rem;
     /* 6px */
@@ -86,10 +86,10 @@
     --popover-foreground: 0 0% 100%;
     /* #FFFFFF */
 
-    --primary: 349 100% 45%;
-    /* #e4002b */
-    --primary-foreground: 0 0% 100%;
-    /* #FFFFFF */
+    --primary: 0 0% 90%;
+    /* Meliá Light Gray */
+    --primary-foreground: 0 0% 10%;
+    /* Dark */
 
     --secondary: 240 5% 14%;
     /* #212126 */
@@ -115,8 +115,8 @@
     /* #212126 */
     --input: 240 5% 12%;
     /* #1C1C21 */
-    --ring: 349 100% 45%;
-    /* #e4002b */
+    --ring: 0 0% 90%;
+    /* Meliá Light Gray */
   }
 }
 

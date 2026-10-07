@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Station V3 - Mapeo Exhaustivo Backend y Frontend</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-teal: #14b8a6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .node-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+        }
+
+        .node-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .node-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .badge {
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-frontend { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-backend { background-color: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-api { background-color: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-database { background-color: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-script { background-color: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #cbd5e1;
+            white-space: nowrap;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .type {
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #f472b6;
+            font-size: 0.85rem;
+            background: rgba(244, 114, 182, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .code-snippet {
+            font-family: 'Monaco', 'Consolas', monospace;
+            background: #0f172a;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+            border: 1px solid #1e293b;
+            margin-top: 0.5rem;
+            display: block;
+            overflow-x: auto;
+        }
+
+        .relationship-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .arrow { color: #94a3b8; font-weight: bold; }
+        .highlight { color: #38bdf8; font-weight: 500;}
+    </style>
+</head>
+<body>
+
+    <h1>Briefing Station V3</h1>
+    <p class="subtitle">Mapeo Exhaustivo de Nodos Backend, Pipeline de Scripts, APIs y Estado Global</p>
+
+    <!-- NODO 1: BACKEND API -->
+    <div class="node-section">
+        <div class="node-header">
+            <h2 class="node-title">1. Nodo API: Microservicio de Traducción</h2>
+            <span class="badge badge-api">Backend (Next.js Route)</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Endpoint / Archivo</th>
+                    <th>Payload (Input)</th>
+                    <th>Estructura de Respuesta (Output)</th>
+                    <th>Lógica Interna y Dependencias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>POST /api/translate</code><br><span style="font-size:0.8rem; color:#94a3b8;">app/api/translate/route.ts</span></td>
+                    <td>
+                        <span class="type">JSON Body</span>
+                        <div class="code-snippet">
+{
+  "text": string,
+  "targetLang": string
+}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="type">JSON Body</span>
+                        <div class="code-snippet">
+{
+  "translatedText": string
+}  // HTTP 200
+                        </div>
+                    </td>
+                    <td>
+                        <div class="relationship-box">
+                            • Consumo de paquete: <code>google-translate-api-x</code><br>
+                            • <b>Mutación:</b> Si <code>targetLang === 'zh'</code>, se mapea internamente a <code>'zh-CN'</code> para evitar fallos de Google.<br>
+                            • Control de errores nativo (Manejo de Array vs String en la respuesta de Google) e inyección de HTTP 500.
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NODO 2: PERSISTENCE LAYER -->
+    <div class="node-section">
+        <div class="node-header">
+            <h2 class="node-title">2. Nodo Persistencia: Storage Layer & IndexedDB / LocalStorage</h2>
+            <span class="badge badge-database">Client / Browser DB</span>
+            <span class="badge badge-backend">Data Models</span>
+        </div>
+        <p style="margin-top:0; color:#94a3b8; font-size:0.9rem;">Abstracción de backend local (en preparación para Cloud Migration Phase 1). Archivo: <code>lib/storage.ts</code></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Entidad (Key)</th>
+                    <th>Tipo / Interfaz Principal</th>
+                    <th>Acciones CRUD (Operaciones)</th>
+                    <th>Estructura Interna</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>mockup_briefs</code><br><span style="font-size:0.8rem; color:#64748b;">(IndexedDB via idb-keyval)</span></td>
+                    <td><span class="type">Brief[]</span></td>
+                    <td><code>getBriefs()</code>, <code>saveBrief(state, id?)</code>, <code>getBrief(id)</code>, <code>deleteBrief(id)</code>, <code>duplicateBrief(id)</code>, <code>updateBriefStatus(id, status)</code></td>
+                    <td>
+                        <div class="code-snippet">
+{ 
+  id: string, name: string, 
+  status: 'draft'|'review'|'approved',
+  createdAt: string,
+  state: BriefingState (Inputs, Creative, Matrix...)
+}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>mockup_templates</code><br><span style="font-size:0.8rem; color:#64748b;">(IndexedDB)</span></td>
+                    <td><span class="type">Template[]</span></td>
+                    <td><code>getTemplates()</code>, <code>saveTemplate()</code>, <code>deleteTemplate()</code></td>
+                    <td>Contiene Matrices pre-configuradas (ej: <code>'tpl_us_full'</code> inyecta automáticamente Placements US y <code>marketingObjective: conversion</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>briefing_station_users</code><br><span style="font-size:0.8rem; color:#64748b;">(LocalStorage)</span></td>
+                    <td><span class="type">User[]</span></td>
+                    <td><code>getUsers()</code>, <code>saveUser()</code>, <code>deleteUser()</code></td>
+                    <td><code>{ id, name, email, role: 'admin'|'editor' }</code>. Variables estáticas sincronas.</td>
+                </tr>
+                <tr>
+                    <td><code>briefing_station_settings</code><br><span style="font-size:0.8rem; color:#64748b;">(LocalStorage)</span></td>
+                    <td><span class="type">Settings</span></td>
+                    <td><code>getSettings()</code>, <code>saveSettings()</code>, <code>getPlacements()</code></td>
+                    <td>Gestión de idiomas (<code>appLanguage</code>), espacios de trabajo (<code>workspaceName</code>) y configuraciones globales para la APP.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NODO 3: PIPELINE DE SCRIPTS Y NODE.JS -->
+    <div class="node-section">
+        <div class="node-header">
+            <h2 class="node-title">3. Nodo Pipeline: Export & Transformation Scripts (Server-side/Node.js)</h2>
+            <span class="badge badge-script">Node.js Scripts</span>
+            <span class="badge badge-backend">Data ETL</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Script Ejecutor</th>
+                    <th>Inputs Maestros</th>
+                    <th>Algoritmo y Lógica de Transformación</th>
+                    <th>Outputs / Archivos Generados</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>export_tables.js</code><br><i>Splitting Script</i></td>
+                    <td><code>data validation.csv</code> (Master File)</td>
+                    <td>
+                        <div class="relationship-box">
+                            • Extrae columnas específicas en diccionarios: Ej: la llave <code>'Formatos'</code> escanea las columnas <code>['Formato', 'Formato_Abr']</code>.<br>
+                            • Realiza de-duplicación masiva via <code>JSON.stringify</code> para limpiar duplicados absolutos.<br>
+                            • Omite (filter) las filas completamente vacías.
+                        </div>
+                    </td>
+                    <td>10 Archivos independientes:<br><code>Tamanos.csv, Formatos.csv, Estrategias.csv, Brands.csv, Canales.csv, Hoteles_Destinos.csv, Campanas.csv, Mercado_Idioma.csv, Agencias.csv, Contenidos.csv</code></td>
+                </tr>
+                <tr>
+                    <td><code>final_export.js</code><br><i>Consolidation Script</i></td>
+                    <td>Los 10 CSVs generados arriba + Array <code>PLACEMENTS</code> en código.</td>
+                    <td>
+                        <div class="relationship-box">
+                            <b>Fase 1:</b> Toma los 10 archivos iterables y los pega en columnas rellenando con cadenas vacías <code>Array(d.headers.length).fill('')</code> hasta cuadrar el maximo global de filas <code>(maxRows)</code>.<br>
+                            <b>Fase 2:</b> Declara 40 variables duras (Hardcoded Placements) con el esquema: <code>{channel, name, size, width, height, weight, type}</code>. Ej. Peso de un video meta: <code>weight: 4096 / type: 'vid'</code>.
+                        </div>
+                    </td>
+                    <td>
+                        • <code>DATA_VALIDATION.csv</code> (El re-ensamblaje vertical).<br>
+                        • <code>placements.csv</code> (Array convertido a CSV con headers <code>[canal, placement, nombre, ancho, alto, peso max, tipologia]</code>).
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>export.js</code><br><i>Final Payload Generator</i></td>
+                    <td>Variables de Campaign (JSON Constante interno) simulando el <code>BriefingState</code>.</td>
+                    <td>
+                        <div class="relationship-box">
+                            <b>1. Nomenclatura Dinámica:</b> Usa <code>resolveToken()</code> interceptando: <code>size, format, strategy, year, month, brand, channel, campaign_name, market_code, language, agency, content_type, duration, version</code>. Convierte a lowerCase y une con guiones <code>'-'</code>.<br>
+                            <b>2. Mapeos Cruzados:</b> Por cada País seleccionado en la Matriz, busca su idioma (<code>defaultLang</code>) y si existió traducción la inyecta, de lo contrario extrae el <code>CreativeInputs</code> original (Fallback).
+                        </div>
+                    </td>
+                    <td>
+                        • <code>file_management_..csv</code><br>
+                        • <code>photoshop_content_..csv</code><br>
+                        • <code>salesforce_feed_..csv</code>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NODO 4: FRONTEND CORE STATE RECAP -->
+    <div class="node-section">
+        <div class="node-header">
+            <h2 class="node-title">4. Nodo Core Global: Frontend State Variables (Recap)</h2>
+            <span class="badge badge-frontend">Zustand Store</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Estado de Mutación</th>
+                    <th>Variables Clave</th>
+                    <th>Impacto (Relación con Backend)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Campaign Inputs</b></td>
+                    <td><code>campaignName, brand, strategy, regions, classification, marketingObjective, targetAudience</code></td>
+                    <td>Serializado e inyectado como <code>state.inputs</code> en IndexedDB. Altera el naming convention del <code>file_management_..csv</code>.</td>
+                </tr>
+                <tr>
+                    <td><b>Creative / Translations</b></td>
+                    <td><code>claim, cta, discount, landingTexts, usp1/2/3</code> | Traducciones <code>es, de, fr</code></td>
+                    <td>Punto de contacto directo para el <code>POST /api/translate</code>. Construye el <code>Photoshop Content CSV</code>.</td>
+                </tr>
+                <tr>
+                    <td><b>PSD Editor Logic</b></td>
+                    <td><code>layers[] (left, top, height, width, rotation, type)</code>, <code>history</code>, <code>future</code></td>
+                    <td>Motor paramétrico independiente que manipula coordinadas. Relacionado con <code>feedData</code> que viene del CSV de Exportaciones.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge';
 
 export function FeedPreview() {
     const { matrix, inputs, creative, translations, namingConvention, content } = useBriefingStore();
-    const [activeTab, setActiveTab] = React.useState<'media' | 'creative' | 'salesforce'>('creative');
+    const [activeTab, setActiveTab] = React.useState<'media' | 'creative' | 'clinch'>('creative');
 
     // Dynamic Placements
     const [placements, setPlacements] = React.useState<Placement[]>(SEED_PLACEMENTS);
@@ -187,8 +187,8 @@ export function FeedPreview() {
         return result;
     }, [matrix, inputs]);
 
-    // Salesforce Rows
-    const salesforceRows = React.useMemo(() => {
+    // Clinch Rows
+    const clinchRows = React.useMemo(() => {
         const result: any[] = [];
         Object.entries(matrix).forEach(([marketSelector, placementIds]) => {
             if (!placementIds || placementIds.length === 0) return;
@@ -291,8 +291,8 @@ export function FeedPreview() {
         download(csvContent, `photoshop_content_${inputs.campaignName || 'draft'}.csv`);
     };
 
-    const downloadSalesforceCSV = () => {
-        if (salesforceRows.length === 0) return;
+    const downloadClinchCSV = () => {
+        if (clinchRows.length === 0) return;
         const headers = [
             'Campaign_Name', 'Market', 'Language', 
             'Claim', 'Discount', 'CTA', 'USP1', 'USP2', 'USP3', 
@@ -300,7 +300,7 @@ export function FeedPreview() {
         ];
         const csvContent = [
             headers.join(','),
-            ...salesforceRows.map(row => [
+            ...clinchRows.map(row => [
                 `"${row.campaign}"`,
                 `"${row.market}"`,
                 `"${row.lang}"`,
@@ -314,7 +314,7 @@ export function FeedPreview() {
                 `"${row.landingTitle || ''}"`
             ].join(','))
         ].join('\n');
-        download(csvContent, `salesforce_feed_${inputs.campaignName || 'draft'}.csv`);
+        download(csvContent, `clinch_feed_${inputs.campaignName || 'draft'}.csv`);
     };
 
     const download = (content: string, filename: string) => {
@@ -328,7 +328,7 @@ export function FeedPreview() {
         document.body.removeChild(link);
     }
 
-    const currentRows = activeTab === 'media' ? mediaRows : (activeTab === 'creative' ? creativeRows : salesforceRows);
+    const currentRows = activeTab === 'media' ? mediaRows : (activeTab === 'creative' ? creativeRows : clinchRows);
 
     if (mediaRows.length === 0 && creativeRows.length === 0) {
         // Only show empty state if NOTHING selected at all.
@@ -351,7 +351,7 @@ export function FeedPreview() {
                         Generated <span className="text-primary font-semibold">{currentRows.length} rows</span> for {
                             activeTab === 'media' ? 'Media File Naming' : 
                             activeTab === 'creative' ? 'Photoshop Data' : 
-                            'Salesforce Feed'
+                            'Clinch Feed'
                         }.
                     </p>
                 </div>
@@ -368,14 +368,14 @@ export function FeedPreview() {
                         Photoshop
                     </button>
                     <button
-                        onClick={() => setActiveTab('salesforce')}
+                        onClick={() => setActiveTab('clinch')}
                         className={cn(
                             "h-8 px-3 text-xs radius-btn transition-all flex items-center gap-2 font-medium",
-                            activeTab === 'salesforce' ? "bg-white text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground hover:bg-white/50"
+                            activeTab === 'clinch' ? "bg-white text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground hover:bg-white/50"
                         )}
                     >
                         <Database className="w-3.5 h-3.5" />
-                        Salesforce
+                        Clinch
                     </button>
                     <button
                         onClick={() => setActiveTab('media')}
@@ -469,7 +469,7 @@ export function FeedPreview() {
                                         )
                                     })
                                 ) : (
-                                    salesforceRows.map((row, i) => (
+                                    clinchRows.map((row, i) => (
                                         <tr key={i} className="hover:bg-muted/50 transition-colors group">
                                             <td className="px-6 py-3 font-mono text-[11px] text-foreground select-all font-medium whitespace-nowrap">{row.campaign}</td>
                                             <td className="px-6 py-3 text-xs font-semibold text-foreground">{row.market}</td>
@@ -493,7 +493,7 @@ export function FeedPreview() {
                         onClick={
                             activeTab === 'media' ? downloadMediaCSV : 
                             activeTab === 'creative' ? downloadCreativeCSV : 
-                            downloadSalesforceCSV
+                            downloadClinchCSV
                         }
                         className="radius-btn font-medium"
                     >
@@ -501,7 +501,7 @@ export function FeedPreview() {
                         Download {
                             activeTab === 'media' ? 'Naming' : 
                             activeTab === 'creative' ? 'Photoshop' : 
-                            'Salesforce'
+                            'Clinch'
                         } CSV
                     </Button>
                 </div>

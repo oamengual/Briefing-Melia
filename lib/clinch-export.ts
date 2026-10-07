@@ -1,11 +1,11 @@
 import { Brief } from './types';
 import { MARKETS } from './constants';
 
-export function generateSalesforceCSV(brief: Brief): string {
+export function generateClinchCSV(brief: Brief): string {
     const { state } = brief;
     const { inputs, creative, translations, matrix } = state;
 
-    // 1. Define Headers
+    // 1. Define Headers for Clinch DCO
     const headers = [
         'Campaign_Name',
         'Brand',
@@ -22,15 +22,15 @@ export function generateSalesforceCSV(brief: Brief): string {
         'USP1',
         'USP2',
         'USP3',
-        'Landing_Title',
-        'Landing_Subtitle',
-        'Landing_Body',
-        'Landing_CTA',
         'Newsletter_Subject',
         'Newsletter_Preview',
         'Newsletter_Header',
         'Newsletter_Body',
         'Newsletter_CTA',
+        'Landing_Title',
+        'Landing_Subtitle',
+        'Landing_Body',
+        'Landing_CTA',
         'Landing_Page_URL'
     ];
 
@@ -68,15 +68,15 @@ export function generateSalesforceCSV(brief: Brief): string {
             finalCreative.usp1 || '',
             finalCreative.usp2 || '',
             finalCreative.usp3 || '',
-            finalCreative.landing?.title || '',
-            finalCreative.landing?.subtitle || '',
-            finalCreative.landing?.body || '',
-            finalCreative.landing?.cta || '',
             finalCreative.newsletter?.subject || '',
             finalCreative.newsletter?.preview || '',
             finalCreative.newsletter?.header || '',
             finalCreative.newsletter?.body || '',
             finalCreative.newsletter?.cta || '',
+            finalCreative.landing?.title || '',
+            finalCreative.landing?.subtitle || '',
+            finalCreative.landing?.body || '',
+            finalCreative.landing?.cta || '',
             inputs.landingPageUrl || ''
         ];
 

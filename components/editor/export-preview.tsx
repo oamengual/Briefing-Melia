@@ -17,7 +17,7 @@ import { PreviewModal } from './export/preview-modal';
 import { ExportPreviewProps, VariantGroup, VariantItem, FeedRow, Template } from './export/types';
 import { CreativeDashboard } from '@/components/creative-dashboard';
 import { Palette } from 'lucide-react';
-import { generateSalesforceCSV } from '@/lib/salesforce-export';
+import { generateClinchCSV } from '@/lib/clinch-export';
 
 // --- Main Component ---
 
@@ -333,11 +333,11 @@ export function ExportPreview({ templates, brief, onLoadState }: ExportPreviewPr
         }
     };
 
-    const handleSalesforceExport = () => {
+    const handleClinchExport = () => {
         if (!brief) return;
-        const csv = generateSalesforceCSV(brief);
+        const csv = generateClinchCSV(brief);
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        saveAs(blob, `${brief.name.replace(/\s+/g, '_')}_salesforce_feed.csv`);
+        saveAs(blob, `${brief.name.replace(/\s+/g, '_')}_clinch_feed.csv`);
     };
 
     return (
@@ -368,7 +368,7 @@ export function ExportPreview({ templates, brief, onLoadState }: ExportPreviewPr
                 canExport={groupedVariants.length > 0 && !!feedData}
                 totalAssets={totalAssets}
                 onLaunchDashboard={() => setIsDashboardOpen(true)}
-                onSalesforceExport={handleSalesforceExport}
+                onClinchExport={handleClinchExport}
             />
 
             {/* MAIN GRID */}
