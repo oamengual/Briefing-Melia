@@ -91,10 +91,10 @@ INITIAL_MELIA_BRANDS.push({
         logoIds: ['asset_logo_brand_affiliated'],
         fontIds: {}
     });
-INITIAL_MELIA_ASSETS.push({ id: 'asset_logo_brand_falcons', type: 'logo', name: 'Falcon's Resorts Logo Primary', mimeType: 'image/svg+xml', data: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgNDAwIDE1MCI+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idHJhbnNwYXJlbnQiIC8+CiAgICAgICAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0ibm9ybWFsIiBmaWxsPSIjOEU0NEFEIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMCI+RmFsY29uJ3MgUmVzb3J0czwvdGV4dD4KICAgIDwvc3ZnPg==' });
+INITIAL_MELIA_ASSETS.push({ id: 'asset_logo_brand_falcons', type: 'logo', name: "Falcon's Resorts Logo Primary", mimeType: 'image/svg+xml', data: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgNDAwIDE1MCI+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idHJhbnNwYXJlbnQiIC8+CiAgICAgICAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjM2IiBmb250LXdlaWdodD0ibm9ybWFsIiBmaWxsPSIjOEU0NEFEIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMCI+RmFsY29uJ3MgUmVzb3J0czwvdGV4dD4KICAgIDwvc3ZnPg==' });
 INITIAL_MELIA_BRANDS.push({
         id: 'brand_falcons',
-        name: 'Falcon's Resorts',
+        name: "Falcon's Resorts",
         colors: ["#8E44AD", "#FFFFFF"],
         logoIds: ['asset_logo_brand_falcons'],
         fontIds: {}
