@@ -1,41 +1,60 @@
 Channel,Name,Size,Width,Height,Weight,Type
-Amazon,Wide Skyscraper,160x600,160,600,150,img
-Amazon,Half Page Ad,300x600,300,600,150,img
-Amazon,Medium Rectangle,300x250,300,250,150,img
-Amazon,Mobile Leaderboard,320x50,320,50,150,img
-Amazon,Leaderboard,728x90,728,90,150,img
-Amazon,Billboard,970x250,970,250,150,img
-App,Fondo,1080x1200,1080,1200,500,img
-App,Stories,1080x1700,1080,1700,500,img
-Criteo RTG,Banner Genérico,1200x628,1200,628,150,img
-Criteo RTG,Banner Cuadrado,1200x1200,1200,1200,150,img
-Criteo RTG,Banner Vertical,800x1200,800,1200,150,img
-Criteo RTG,Skyscraper,120x600,120,600,150,img
-Criteo RTG,Wide Skyscraper,160x600,160,600,150,img
-Criteo RTG,Half Page Ad,300x600,300,600,150,img
-Criteo RTG,Medium Rectangle,300x250,300,250,150,img
-Criteo RTG,Large Rectangle,336x280,336,280,150,img
-Criteo RTG,Mobile Leaderboard,320x50,320,50,150,img
-Criteo RTG,Full Banner,468x60,468,60,150,img
-Criteo RTG,Leaderboard,728x90,728,90,150,img
-Criteo RTG,Large Leaderboard,970x90,970,90,150,img
-Criteo RTG,Billboard,970x250,970,250,150,img
-YT / Demand Gen,Landscape,1200x628,1200,628,150,img
-YT / Demand Gen,Square,1200x1200,1200,1200,150,img
-YT / Demand Gen,Portrait,960x1200,960,1200,150,img
-Meta,Image Feed,1080x1080,1080,1080,150,img
-Meta,Stories Image,1080x1920,1080,1920,150,img
-Meta,Vídeo feed,1080x1080,1080,1080,4096,vid
-Meta,Vídeo stories,1080x1920,1080,1920,4096,vid
-Newsletter,Desktop,1200x900,1200,900,500,img
-Newsletter,Mobile,1200x1200,1200,1200,500,img
-Newsletter,Footer,1200x900,1200,900,500,img
-Paquetes,Slide Meliá Escapes,1366x600,1366,600,500,img
-Paquetes,Slide Mobile Meliá Escapes,480x400,480,400,500,img
-Paquetes,Slide Paquetes US/CA,1366x400,1366,400,500,img
-Paquetes,Paquetes MX Banner 1,1920x450,1920,450,500,img
-Meta,Videotemplate vertical,1080x1920,1080,1920,10240,vid
-Meta,Videotemplate cuadrado,1080x1080,1080,1080,10240,vid
-Tik Tok,Vídeo vertical,1080x1920,1080,1920,10240,vid
-Web,Slide ofertas desktop,1366x600,1366,600,500,img
-Web,Landing desktop,2732x1200,2732,1200,1024,img
+EMAIL,Email hero Next Gen - Clean image,1100x734,1100,734,150,img
+EMAIL,Email hero Next Gen - GIF image,1100x734,1100,734,150,gif
+EMAIL,Push APP - Clean image,980x519,980,519,150,img
+EMAIL,WhatsApp Business - Clean image (Max 5MB),1200x628,1200,628,5000,img
+EMAIL,Email signature,800x190,800,190,150,img
+SOCIAL,Facebook MP4 Animation,1080x1350,1080,1350,150,vid
+SOCIAL,Instagram Stories MP4 Animation (Stories Safe Zone),1080x1920,1080,1920,150,vid
+SOCIAL,Instagram Reels MP4 Animation (Reels Safe Zone),1080x1920,1080,1920,150,vid
+SOCIAL,Facebook JPG,1080x1080,1080,1080,150,img
+DISPLAY,HTML,5120x600,5120,600,150,img
+DISPLAY,HTML,5160x600,5160,600,150,img
+DISPLAY,HTML,5300x50,5300,50,150,img
+DISPLAY,HTML,5300x250,5300,250,150,img
+DISPLAY,HTML,5300x600,5300,600,150,img
+DISPLAY,HTML,5320x50,5320,50,150,img
+DISPLAY,HTML,5468x60,5468,60,150,img
+DISPLAY,HTML,5728x90,5728,90,150,img
+DISPLAY,HTML,5970x250,5970,250,150,img
+DISPLAY,Retargeting Cortinillas JPG,336x280,336,280,150,img
+DISPLAY,Retargeting Cortinillas JPG,468x60,468,60,150,img
+DISPLAY,Retargeting Cortinillas JPG,728x90,728,90,150,img
+DISPLAY,Retargeting Cortinillas JPG,970x90,970,90,150,img
+DISPLAY,Retargeting Cortinillas JPG,970x250,970,250,150,img
+DISPLAY,Retargeting Cortinillas JPG,320x480,320,480,150,img
+DISPLAY,Retargeting Cortinillas JPG,480x320,480,320,150,img
+DISPLAY,Amazon,120x600,120,600,150,img
+DISPLAY,Amazon,160x600,160,600,150,img
+DISPLAY,Amazon,300x50,300,50,150,img
+DISPLAY,Amazon,300x250,300,250,150,img
+DISPLAY,Amazon,300x600,300,600,150,img
+DISPLAY,Amazon,320x50,320,50,150,img
+DISPLAY,Amazon,468x60,468,60,150,img
+DISPLAY,Amazon,728x90,728,90,150,img
+DISPLAY,Amazon,970x250,970,250,150,img
+DISPLAY NATIVO,Creatividades nativas alta resolución (máx. 600 KB),1800x1200,1800,1200,600,img
+SEM,Imagen Horizontal JPG,1200x628,1200,628,150,img
+SEM,Imagen Cuadrada JPG,1200x1200,1200,1200,150,img
+SEM,Imagen Vertical JPG,960x1200,960,1200,150,img
+SEM,Imagen Horizontal JPG APP (Max 5 MB),1200x628,1200,628,5000,img
+SEM,Imagen Cuadrada JPG APP (Max 5 MB),1200x1200,1200,1200,5000,img
+SEM,Imagen Vertical JPG APP (Max 5 MB),1200x1500,1200,1500,5000,img
+GOOGLE BUSINESS PROFILE,JPG fondo sólido (logo campaña + dto.),1920x1080,1920,1080,150,img
+PORTUGAL HOTELS,White,2560x1440,2560,1440,150,img
+PORTUGAL HOTELS,JPG,1121x900,1121,900,150,img
+PORTUGAL HOTELS,White cuadrado,500x500,500,500,150,img
+PORTUGAL HOTELS,White vertical,768x1500,768,1500,150,img
+PROMO APP,APP (imagen limpia),2160x3840,2160,3840,150,img
+PORTAL EMPLEADO,Banner carrusel portada (imagen limpia),1170x500,1170,500,150,img
+PORTAL EMPLEADO,Banner miniatura noticias,274x154,274,154,150,img
+PORTAL EMPLEADO,Banner estático,680x370,680,370,150,img
+PORTAL EMPLEADO,Newsfeed (imagen limpia),300x300,300,300,150,img
+PORTAL EMPLEADO,Banner carrusel portada,1204x250,1204,250,150,img
+OTA / APAC,Ctrip & Meituan Flagship Store Banner,1125x531,1125,531,150,img
+OTA / APAC,Meituan Flagship Store Brandzone Banner,710x380,710,380,150,img
+OTA / APAC,WeChat,750x556,750,556,150,img
+OTA / APAC,WeChat + PSD,768x1024,768,1024,150,img
+OTA / APAC,WeChat + PSD,1280x720,1280,720,150,img
+OTA / APAC,Baidu SEM PC Sitelink,1200x400,1200,400,150,img
+OTA / APAC,Baidu SEM Mobile Sitelink,518x292,518,292,150,img

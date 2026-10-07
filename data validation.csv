@@ -1,63 +1,63 @@
 Tamaño,Formato,Formato_Abr,Estrategia,Año,Q,Mes,Brand,Canal,Abr_Canal,Hotel,Abr_Hotel,Destino,Abr_Destino,Campaña,Abr_Campaña,Mercado-Idioma,Agencias,Abr_Agencias,Contenido,Abr_Contenido,Segundos Vídeo,Versión,USP_ID,USP_es-es,USP_en-us,USP_de-de,USP_fr-fr,USP_nl-nl,USP_it-it,USP_pt-pt,USP_pl-pl,Placement_Channel,Placement_Name,Placement_Size,Placement_Width,Placement_Height,Placement_Weight,Placement_Type
-1080x1080,video,vid,ongoing,25,q1,ene,Gran Meliá,Google,google,Gran Meliá Palacio de los Duques,GMPD,Madrid,MAD,Ventas Privadas,loyalty,us-en,berepublic,br,usergeneratedcontent,ugc,6s,v1,MREW,Acumula puntos MeliáRewards,Earn MeliáRewards points,MeliáRewards-Punkte sammeln,Cumulez des points MeliáRewards,MeliáRewards punten sparen,Accumula punti MeliáRewards,Acumule pontos MeliáRewards,Zbieraj punkty MeliáRewards,Amazon,Wide Skyscraper,160x600,160,600,150,img
-1080x1920,imagen,img,push,26,q2,feb,Paradisus,Amazon,amz,Gran Meliá Fénix,GMFN,Barcelona,BCN,Black Friday,bf,ca-fr,cooltura,ct,remix,rmx,15s,v2,MRED,Hasta -20% dto. MeliáRewards,Up to -20% off MeliáRewards,Bis zu -20% Rabatt MeliáRewards,Jusqu'à -20% de réduc. MeliáRewards,Tot -20% korting MeliáRewards,Fino al -20% di sconto MeliáRewards,Até -20% desc. MeliáRewards,Do -20% zniżki MeliáRewards,Amazon,Half Page Ad,300x600,300,600,150,img
-1920x1080,gif,gif,,,q3,mar,ME by Meliá,Tik Tok,tt,Gran Meliá Victoria,GMVC,Valencia,VLC,Meliá Escapes,meliaes,ca-en,contentjet,cj,voiceover,vo,30s,v3,MPM,Pago Puntos + Dinero,Points + Cash payment,Zahlung mit Punkten + Geld,Paiement Points + Argent,Punten + Geld betaling,Pagamento Punti + Denaro,Pagamento Pontos + Dinheiro,Płatność Punkty + Pieniądze,Amazon,Medium Rectangle,300x250,300,250,150,img
-1200x1200,videotemplate,vtmp,,,q4,abr,Meliá Hotels & Resorts,Meta,meta,Gran Meliá Don Pepe,GMDP,Alicante,ALC,Cyber Monday,cyber,mx-es,sapphire,sp,creator,cre,,v4,MRB,Beneficios MeliáRewards,MeliáRewards benefits,MeliáRewards-Vorteile,Avantages MeliáRewards,MeliáRewards voordelen,Vantaggi MeliáRewards,Benefícios MeliáRewards,Korzyści MeliáRewards,Amazon,Mobile Leaderboard,320x50,320,50,150,img
-960x1200,template de imagen para catálogo,tmpi,,,,may,INNSiDE by Meliá,Taboola,tbl,Gran Meliá Sancti Petri,GMSP,Sevilla,SVQ,Megacaptación,mega,cr-es,influencer,inf,no aplìca,na,,v5,MESC,Meliá Escapes (Vuelo + Hotel),Meliá Escapes (Flight + Hotel),Meliá Escapes (Flug + Hotel),Meliá Escapes (Vol + Hôtel),Meliá Escapes (Vlucht + Hotel),Meliá Escapes (Volo + Hotel),Meliá Escapes (Voo + Hotel),Meliá Escapes (Lot + Hotel),Amazon,Leaderboard,728x90,728,90,150,img
-1200x628,template de video para catalogo,tmpv,,,,jun,Sol by Meliá,Criteo RTG,crtg,Gran Meliá Iguazú,GMIG,Malaga,AGP,Crédito,credito,jm-en,inhouse,inh,,,,v6,YHI,Relájate en el YHI Spa,Relax at YHI Spa,Entspannen Sie im YHI Spa,Détendez-vous au YHI Spa,Ontspan in de YHI Spa,Rilassati alla YHI Spa,Relaxe no YHI Spa,Zrelaksuj się w YHI Spa,Amazon,Billboard,970x250,970,250,150,img
-300x60,,,,,,jul,ZEL,App,app,Gran Meliá Jakarta,GMJK,Marbella,MAR,Hottest Winter Deals,hottest,pa-es,makingscience,ms,,,,v7,LEV,Servicio The Level,The Level service,The Level Service,Service The Level,The Level-service,Servizio The Level,Serviço The Level,Usługa The Level,App,Fondo,1080x1200,1080,1200,500,img
-120x600,,,,,,sep,,Newsletter,news,Gran Meliá Xian,GMXN,Cadiz,CAD,Love is in the City,love,ar-es,,,,,,v8,RLEV,Experiencia RedLevel,RedLevel experience,RedLevel Erlebnis,Expérience RedLevel,RedLevel ervaring,Esperienza RedLevel,Experiência RedLevel,Doświadczenie RedLevel,App,Stories,1080x1700,1080,1700,500,img
-160x600,,,,,,oct,,Web,web,ME London,MELN,Ibiza,IBZ,,,co-es,,,,,,v9,PET,Hoteles Pet Friendly,Pet Friendly hotels,Haustierfreundliche Hotels,Hôtels acceptant les animaux,Huisdiervriendelijke hotels,Hotel Pet Friendly,Hotéis Pet Friendly,Hotele przyjazne zwierzętom,Criteo RTG,Banner Genérico,1200x628,1200,628,150,img
-300x600,,,,,,nov,,Paquetes,pkg,ME Dubai,MEDB,Mallorca,PMI,,,cl-es,,,,,,v10,KID,Programa Kids & Co,Kids & Co program,Kids & Co Programm,Programme Kids & Co,Kids & Co programma,Programma Kids & Co,Programa Kids & Co,Program Kids & Co,Criteo RTG,Banner Cuadrado,1200x1200,1200,1200,150,img
-300x250,,,,,,dic,,Expedia,exp,ME Milan Il Duca,MEMI,Menorca,MAH,,,do-es,,,,,,,ROM,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Criteo RTG,Banner Vertical,800x1200,800,1200,150,img
-336x280,,,,,,,,,,ME Madrid Reina Victoria,MEMD,Tenerife,TFS,,,es-es,,,,,,,ALLI,Disfruta del Todo Incluido,Enjoy All Inclusive,All Inclusive genießen,Profitez du Tout Compris,Geniet van All Inclusive,Goditi l'All Inclusive,Desfrute do Tudo Incluído,Ciesz się All Inclusive,Criteo RTG,Skyscraper,120x600,120,600,150,img
-320x50,,,,,,,,,,ME Ibiza,MEIB,Gran Canaria,LPA,,,gb-en,,,,,,,DIN,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Criteo RTG,Wide Skyscraper,160x600,160,600,150,img
-468x60,,,,,,,,,,ME Sitges Terramar,MEST,Lanzarote,ACE,,,de-de,,,,,,,LCO,Late Check-out,Late Check-out,Später Check-out,Départ tardif,Late Check-out,Late Check-out,Check-out tardio,Późne wymeldowanie,Criteo RTG,Half Page Ad,300x600,300,600,150,img
-728x90,,,,,,,,,,ME Cabo,MECB,Fuerteventura,FUE,,,be-nl,,,,,,,WIF,Wi-Fi gratis,Free Wi-Fi,Kostenloses WLAN,Wi-Fi gratuit,Gratis wifi,Wi-Fi gratuito,Wi-Fi grátis,Darmowe Wi-Fi,Criteo RTG,Medium Rectangle,300x250,300,250,150,img
-970x90,,,,,,,,,,Paradisus Palma Real Golf & Spa Resort,PPR,London,LON,,,be-fr,,,,,,,CAN,Cancelación gratuita,Free cancellation,Kostenlose Stornierung,Annulation gratuite,Gratis annuleren,Cancellazione gratuita,Cancelamento grátis,Darmowe anulowanie,Criteo RTG,Large Rectangle,336x280,336,280,150,img
-970x250,,,,,,,,,,Paradisus Grand Cana,PGC,Manchester,MAN,,,fr-fr,,,,,,,,,,,,,,,,Criteo RTG,Mobile Leaderboard,320x50,320,50,150,img
-1000x600,,,,,,,,,,Paradisus Cancun,PCUN,Liverpool,LPL,,,pt-pt,,,,,,,,,,,,,,,,Criteo RTG,Full Banner,468x60,468,60,150,img
-750x421,,,,,,,,,,Paradisus Playa del Carmen,PPDC,Newcastle,NCL,,,it-it,,,,,,,,,,,,,,,,Criteo RTG,Leaderboard,728x90,728,90,150,img
-1200x628,,,,,,,,,,Paradisus Los Cabos,PLC,Paris,PAR,,,pl-en,,,,,,,,,,,,,,,,Criteo RTG,Large Leaderboard,970x90,970,90,150,img
-800x1200,,,,,,,,,,Paradisus La Perla,PLP,Milan,MIL,,,pl-pl,,,,,,,,,,,,,,,,Criteo RTG,Billboard,970x250,970,250,150,img
-,,,,,,,,,,Paradisus Gran Canaria,PGC,Rome,ROM,,,nl-nl,,,,,,,,,,,,,,,,YT / Demand Gen,Landscape,1200x628,1200,628,150,img
-,,,,,,,,,,Meliá Castilla,MCAS,Berlin,BER,,,ch-de,,,,,,,,,,,,,,,,YT / Demand Gen,Square,1200x1200,1200,1200,150,img
-,,,,,,,,,,Meliá Madrid Princesa,MMPR,Munich,MUC,,,ie-en,,,,,,,,,,,,,,,,YT / Demand Gen,Portrait,960x1200,960,1200,150,img
-,,,,,,,,,,Meliá Barcelona Sky,MBSK,Frankfurt,FRA,,,esc-en,,,,,,,,,,,,,,,,Meta,Image Feed,1080x1080,1080,1080,150,img
-,,,,,,,,,,Meliá Barcelona Sarrià,MBSA,Leipzig,LEJ,,,ma-fr,,,,,,,,,,,,,,,,Meta,Stories Image,1080x1920,1080,1920,150,img
-,,,,,,,,,,Meliá Valencia,MVAL,Dresden,DRS,,,sn-fr,,,,,,,,,,,,,,,,Meta,Vídeo feed,1080x1080,1080,1080,4096,vid
-,,,,,,,,,,Meliá Alicante,MALI,Bremen,BRE,,,au-en,,,,,,,,,,,,,,,,Meta,Vídeo stories,1080x1920,1080,1920,4096,vid
-,,,,,,,,,,Meliá Sitges,MSIT,Vienna,VIE,,,ae-en,,,,,,,,,,,,,,,,Newsletter,Desktop,1200x900,1200,900,500,img
-,,,,,,,,,,Meliá Bilbao,MBIL,Amsterdam,AMS,,,lk-en,,,,,,,,,,,,,,,,Newsletter,Mobile,1200x1200,1200,1200,500,img
-,,,,,,,,,,Meliá Sevilla,MSEV,New York,NYC,,,mu-en,,,,,,,,,,,,,,,,Newsletter,Footer,1200x900,1200,900,500,img
-,,,,,,,,,,Meliá Lebreros,MLEB,Orlando,ORL,,,re-fr,,,,,,,,,,,,,,,,Paquetes,Slide Meliá Escapes,1366x600,1366,600,500,img
-,,,,,,,,,,Meliá Marbella Banús,MMBA,Miami,MIA,,,,,,,,,,,,,,,,,,,Paquetes,Slide Mobile Meliá Escapes,480x400,480,400,500,img
-,,,,,,,,,,Meliá Costa del Sol,MCDS,Los Cabos,SJD,,,,,,,,,,,,,,,,,,,Paquetes,Slide Paquetes US/CA,1366x400,1366,400,500,img
-,,,,,,,,,,Meliá Cala Galdana,MCGA,Cancun,CUN,,,,,,,,,,,,,,,,,,,Paquetes,Paquetes MX Banner 1,1920x450,1920,450,500,img
-,,,,,,,,,,Meliá Palma Marina,MPMA,Playa del Carmen,PDC,,,,,,,,,,,,,,,,,,,Meta,Videotemplate vertical,1080x1920,1080,1920,10240,vid
-,,,,,,,,,,Meliá South Park,MSOP,Punta Cana,PUJ,,,,,,,,,,,,,,,,,,,Meta,Videotemplate cuadrado,1080x1080,1080,1080,10240,vid
-,,,,,,,,,,Meliá London Kensington,MLKE,Nassau,NAS,,,,,,,,,,,,,,,,,,,Tik Tok,Vídeo vertical,1080x1920,1080,1920,10240,vid
-,,,,,,,,,,Meliá Paris La Défense,MPLD,Jamaica,JAM,,,,,,,,,,,,,,,,,,,Web,Slide ofertas desktop,1366x600,1366,600,500,img
-,,,,,,,,,,Meliá Paris Tour Eiffel,MPTE,Dubai,DXB,,,,,,,,,,,,,,,,,,,Web,Landing desktop,2732x1200,2732,1200,1024,img
-,,,,,,,,,,Meliá Milano,MMIL,Bali,DPS,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Berlin,MBER,Koh Samui,USM,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Vienna,MVIE,Ho Tram,SGN,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá White House,MWH,Jakarta,CGK,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Caribe Beach Resort,MCBR,Xian,XIY,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Punta Cana Beach Resort,MPCB,Zanzibar,ZNZ,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Braco Village,MBV,Iguazu,IGU,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Nassau Beach,MNB,Buenos Aires,BUE,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Orlando Celebration,MOC,Sao Paulo,SAO,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Koh Samui,MKS,Caracas,CCS,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Bali,MBAL,Havana,HAV,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Ho Tram Beach Resort,MHT,Varadero,VRA,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Zanzibar,MZAN,Cayo Coco,CCCLa Palma,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,Meliá Desert Palm,MDP,Formentera,FMA,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,INNSiDE New York Nomad,INYN,Bilbao,BIO,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,INNSiDE Manchester,INMA,Zaragoza,ZAZ,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,INNSiDE Liverpool,INLI,Venice,VCE,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,INNSiDE Newcastle,INNE,Florence,FLR,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,INNSiDE Berlin Mitte,INBM,Dusseldorf,DUS,,,,,,,,,,,,,,,,,,,,,,,,,
+1080x1080,video,vid,ongoing,25,q1,ene,Gran Meliá,Google,google,Gran Meliá Palacio de los Duques,GMPD,Madrid,MAD,Ventas Privadas,loyalty,us-en,berepublic,br,usergeneratedcontent,ugc,6s,v1,MREW,Acumula puntos MeliáRewards,Earn MeliáRewards points,MeliáRewards-Punkte sammeln,Cumulez des points MeliáRewards,MeliáRewards punten sparen,Accumula punti MeliáRewards,Acumule pontos MeliáRewards,Zbieraj punkty MeliáRewards,EMAIL,Email hero Next Gen - Clean image,1100x734,1100,734,150,img
+1080x1920,imagen,img,push,26,q2,feb,Paradisus,Amazon,amz,Gran Meliá Fénix,GMFN,Barcelona,BCN,Black Friday,bf,ca-fr,cooltura,ct,remix,rmx,15s,v2,MRED,Hasta -20% dto. MeliáRewards,Up to -20% off MeliáRewards,Bis zu -20% Rabatt MeliáRewards,Jusqu'à -20% de réduc. MeliáRewards,Tot -20% korting MeliáRewards,Fino al -20% di sconto MeliáRewards,Até -20% desc. MeliáRewards,Do -20% zniżki MeliáRewards,EMAIL,Email hero Next Gen - GIF image,1100x734,1100,734,150,gif
+1920x1080,gif,gif,,,q3,mar,ME by Meliá,Tik Tok,tt,Gran Meliá Victoria,GMVC,Valencia,VLC,Meliá Escapes,meliaes,ca-en,contentjet,cj,voiceover,vo,30s,v3,MPM,Pago Puntos + Dinero,Points + Cash payment,Zahlung mit Punkten + Geld,Paiement Points + Argent,Punten + Geld betaling,Pagamento Punti + Denaro,Pagamento Pontos + Dinheiro,Płatność Punkty + Pieniądze,EMAIL,Push APP - Clean image,980x519,980,519,150,img
+1200x1200,videotemplate,vtmp,,,q4,abr,Meliá Hotels & Resorts,Meta,meta,Gran Meliá Don Pepe,GMDP,Alicante,ALC,Cyber Monday,cyber,mx-es,sapphire,sp,creator,cre,,v4,MRB,Beneficios MeliáRewards,MeliáRewards benefits,MeliáRewards-Vorteile,Avantages MeliáRewards,MeliáRewards voordelen,Vantaggi MeliáRewards,Benefícios MeliáRewards,Korzyści MeliáRewards,EMAIL,WhatsApp Business - Clean image (Max 5MB),1200x628,1200,628,5000,img
+960x1200,template de imagen para catálogo,tmpi,,,,may,INNSiDE by Meliá,Taboola,tbl,Gran Meliá Sancti Petri,GMSP,Sevilla,SVQ,Megacaptación,mega,cr-es,influencer,inf,no aplìca,na,,v5,MESC,Meliá Escapes (Vuelo + Hotel),Meliá Escapes (Flight + Hotel),Meliá Escapes (Flug + Hotel),Meliá Escapes (Vol + Hôtel),Meliá Escapes (Vlucht + Hotel),Meliá Escapes (Volo + Hotel),Meliá Escapes (Voo + Hotel),Meliá Escapes (Lot + Hotel),EMAIL,Email signature,800x190,800,190,150,img
+1200x628,template de video para catalogo,tmpv,,,,jun,Sol by Meliá,Criteo RTG,crtg,Gran Meliá Iguazú,GMIG,Malaga,AGP,Crédito,credito,jm-en,inhouse,inh,,,,v6,YHI,Relájate en el YHI Spa,Relax at YHI Spa,Entspannen Sie im YHI Spa,Détendez-vous au YHI Spa,Ontspan in de YHI Spa,Rilassati alla YHI Spa,Relaxe no YHI Spa,Zrelaksuj się w YHI Spa,SOCIAL,Facebook MP4 Animation,1080x1350,1080,1350,150,vid
+300x60,,,,,,jul,ZEL,App,app,Gran Meliá Jakarta,GMJK,Marbella,MAR,Hottest Winter Deals,hottest,pa-es,makingscience,ms,,,,v7,LEV,Servicio The Level,The Level service,The Level Service,Service The Level,The Level-service,Servizio The Level,Serviço The Level,Usługa The Level,SOCIAL,Instagram Stories MP4 Animation (Stories Safe Zone),1080x1920,1080,1920,150,vid
+120x600,,,,,,sep,,Newsletter,news,Gran Meliá Xian,GMXN,Cadiz,CAD,Love is in the City,love,ar-es,,,,,,v8,RLEV,Experiencia RedLevel,RedLevel experience,RedLevel Erlebnis,Expérience RedLevel,RedLevel ervaring,Esperienza RedLevel,Experiência RedLevel,Doświadczenie RedLevel,SOCIAL,Instagram Reels MP4 Animation (Reels Safe Zone),1080x1920,1080,1920,150,vid
+160x600,,,,,,oct,,Web,web,ME London,MELN,Ibiza,IBZ,,,co-es,,,,,,v9,PET,Hoteles Pet Friendly,Pet Friendly hotels,Haustierfreundliche Hotels,Hôtels acceptant les animaux,Huisdiervriendelijke hotels,Hotel Pet Friendly,Hotéis Pet Friendly,Hotele przyjazne zwierzętom,SOCIAL,Facebook JPG,1080x1080,1080,1080,150,img
+300x600,,,,,,nov,,Paquetes,pkg,ME Dubai,MEDB,Mallorca,PMI,,,cl-es,,,,,,v10,KID,Programa Kids & Co,Kids & Co program,Kids & Co Programm,Programme Kids & Co,Kids & Co programma,Programma Kids & Co,Programa Kids & Co,Program Kids & Co,DISPLAY,HTML,5120x600,5120,600,150,img
+300x250,,,,,,dic,,Expedia,exp,ME Milan Il Duca,MEMI,Menorca,MAH,,,do-es,,,,,,,ROM,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,Romance by Meliá,DISPLAY,HTML,5160x600,5160,600,150,img
+336x280,,,,,,,,,,ME Madrid Reina Victoria,MEMD,Tenerife,TFS,,,es-es,,,,,,,ALLI,Disfruta del Todo Incluido,Enjoy All Inclusive,All Inclusive genießen,Profitez du Tout Compris,Geniet van All Inclusive,Goditi l'All Inclusive,Desfrute do Tudo Incluído,Ciesz się All Inclusive,DISPLAY,HTML,5300x50,5300,50,150,img
+320x50,,,,,,,,,,ME Ibiza,MEIB,Gran Canaria,LPA,,,gb-en,,,,,,,DIN,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,Destination Inclusive®,DISPLAY,HTML,5300x250,5300,250,150,img
+468x60,,,,,,,,,,ME Sitges Terramar,MEST,Lanzarote,ACE,,,de-de,,,,,,,LCO,Late Check-out,Late Check-out,Später Check-out,Départ tardif,Late Check-out,Late Check-out,Check-out tardio,Późne wymeldowanie,DISPLAY,HTML,5300x600,5300,600,150,img
+728x90,,,,,,,,,,ME Cabo,MECB,Fuerteventura,FUE,,,be-nl,,,,,,,WIF,Wi-Fi gratis,Free Wi-Fi,Kostenloses WLAN,Wi-Fi gratuit,Gratis wifi,Wi-Fi gratuito,Wi-Fi grátis,Darmowe Wi-Fi,DISPLAY,HTML,5320x50,5320,50,150,img
+970x90,,,,,,,,,,Paradisus Palma Real Golf & Spa Resort,PPR,London,LON,,,be-fr,,,,,,,CAN,Cancelación gratuita,Free cancellation,Kostenlose Stornierung,Annulation gratuite,Gratis annuleren,Cancellazione gratuita,Cancelamento grátis,Darmowe anulowanie,DISPLAY,HTML,5468x60,5468,60,150,img
+970x250,,,,,,,,,,Paradisus Grand Cana,PGC,Manchester,MAN,,,fr-fr,,,,,,,,,,,,,,,,DISPLAY,HTML,5728x90,5728,90,150,img
+1000x600,,,,,,,,,,Paradisus Cancun,PCUN,Liverpool,LPL,,,pt-pt,,,,,,,,,,,,,,,,DISPLAY,HTML,5970x250,5970,250,150,img
+750x421,,,,,,,,,,Paradisus Playa del Carmen,PPDC,Newcastle,NCL,,,it-it,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,336x280,336,280,150,img
+1200x628,,,,,,,,,,Paradisus Los Cabos,PLC,Paris,PAR,,,pl-en,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,468x60,468,60,150,img
+800x1200,,,,,,,,,,Paradisus La Perla,PLP,Milan,MIL,,,pl-pl,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,728x90,728,90,150,img
+,,,,,,,,,,Paradisus Gran Canaria,PGC,Rome,ROM,,,nl-nl,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,970x90,970,90,150,img
+,,,,,,,,,,Meliá Castilla,MCAS,Berlin,BER,,,ch-de,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,970x250,970,250,150,img
+,,,,,,,,,,Meliá Madrid Princesa,MMPR,Munich,MUC,,,ie-en,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,320x480,320,480,150,img
+,,,,,,,,,,Meliá Barcelona Sky,MBSK,Frankfurt,FRA,,,esc-en,,,,,,,,,,,,,,,,DISPLAY,Retargeting Cortinillas JPG,480x320,480,320,150,img
+,,,,,,,,,,Meliá Barcelona Sarrià,MBSA,Leipzig,LEJ,,,ma-fr,,,,,,,,,,,,,,,,DISPLAY,Amazon,120x600,120,600,150,img
+,,,,,,,,,,Meliá Valencia,MVAL,Dresden,DRS,,,sn-fr,,,,,,,,,,,,,,,,DISPLAY,Amazon,160x600,160,600,150,img
+,,,,,,,,,,Meliá Alicante,MALI,Bremen,BRE,,,au-en,,,,,,,,,,,,,,,,DISPLAY,Amazon,300x50,300,50,150,img
+,,,,,,,,,,Meliá Sitges,MSIT,Vienna,VIE,,,ae-en,,,,,,,,,,,,,,,,DISPLAY,Amazon,300x250,300,250,150,img
+,,,,,,,,,,Meliá Bilbao,MBIL,Amsterdam,AMS,,,lk-en,,,,,,,,,,,,,,,,DISPLAY,Amazon,300x600,300,600,150,img
+,,,,,,,,,,Meliá Sevilla,MSEV,New York,NYC,,,mu-en,,,,,,,,,,,,,,,,DISPLAY,Amazon,320x50,320,50,150,img
+,,,,,,,,,,Meliá Lebreros,MLEB,Orlando,ORL,,,re-fr,,,,,,,,,,,,,,,,DISPLAY,Amazon,468x60,468,60,150,img
+,,,,,,,,,,Meliá Marbella Banús,MMBA,Miami,MIA,,,,,,,,,,,,,,,,,,,DISPLAY,Amazon,728x90,728,90,150,img
+,,,,,,,,,,Meliá Costa del Sol,MCDS,Los Cabos,SJD,,,,,,,,,,,,,,,,,,,DISPLAY,Amazon,970x250,970,250,150,img
+,,,,,,,,,,Meliá Cala Galdana,MCGA,Cancun,CUN,,,,,,,,,,,,,,,,,,,DISPLAY NATIVO,Creatividades nativas alta resolución (máx. 600 KB),1800x1200,1800,1200,600,img
+,,,,,,,,,,Meliá Palma Marina,MPMA,Playa del Carmen,PDC,,,,,,,,,,,,,,,,,,,SEM,Imagen Horizontal JPG,1200x628,1200,628,150,img
+,,,,,,,,,,Meliá South Park,MSOP,Punta Cana,PUJ,,,,,,,,,,,,,,,,,,,SEM,Imagen Cuadrada JPG,1200x1200,1200,1200,150,img
+,,,,,,,,,,Meliá London Kensington,MLKE,Nassau,NAS,,,,,,,,,,,,,,,,,,,SEM,Imagen Vertical JPG,960x1200,960,1200,150,img
+,,,,,,,,,,Meliá Paris La Défense,MPLD,Jamaica,JAM,,,,,,,,,,,,,,,,,,,SEM,Imagen Horizontal JPG APP (Max 5 MB),1200x628,1200,628,5000,img
+,,,,,,,,,,Meliá Paris Tour Eiffel,MPTE,Dubai,DXB,,,,,,,,,,,,,,,,,,,SEM,Imagen Cuadrada JPG APP (Max 5 MB),1200x1200,1200,1200,5000,img
+,,,,,,,,,,Meliá Milano,MMIL,Bali,DPS,,,,,,,,,,,,,,,,,,,SEM,Imagen Vertical JPG APP (Max 5 MB),1200x1500,1200,1500,5000,img
+,,,,,,,,,,Meliá Berlin,MBER,Koh Samui,USM,,,,,,,,,,,,,,,,,,,GOOGLE BUSINESS PROFILE,JPG fondo sólido (logo campaña + dto.),1920x1080,1920,1080,150,img
+,,,,,,,,,,Meliá Vienna,MVIE,Ho Tram,SGN,,,,,,,,,,,,,,,,,,,PORTUGAL HOTELS,White,2560x1440,2560,1440,150,img
+,,,,,,,,,,Meliá White House,MWH,Jakarta,CGK,,,,,,,,,,,,,,,,,,,PORTUGAL HOTELS,JPG,1121x900,1121,900,150,img
+,,,,,,,,,,Meliá Caribe Beach Resort,MCBR,Xian,XIY,,,,,,,,,,,,,,,,,,,PORTUGAL HOTELS,White cuadrado,500x500,500,500,150,img
+,,,,,,,,,,Meliá Punta Cana Beach Resort,MPCB,Zanzibar,ZNZ,,,,,,,,,,,,,,,,,,,PORTUGAL HOTELS,White vertical,768x1500,768,1500,150,img
+,,,,,,,,,,Meliá Braco Village,MBV,Iguazu,IGU,,,,,,,,,,,,,,,,,,,PROMO APP,APP (imagen limpia),2160x3840,2160,3840,150,img
+,,,,,,,,,,Meliá Nassau Beach,MNB,Buenos Aires,BUE,,,,,,,,,,,,,,,,,,,PORTAL EMPLEADO,Banner carrusel portada (imagen limpia),1170x500,1170,500,150,img
+,,,,,,,,,,Meliá Orlando Celebration,MOC,Sao Paulo,SAO,,,,,,,,,,,,,,,,,,,PORTAL EMPLEADO,Banner miniatura noticias,274x154,274,154,150,img
+,,,,,,,,,,Meliá Koh Samui,MKS,Caracas,CCS,,,,,,,,,,,,,,,,,,,PORTAL EMPLEADO,Banner estático,680x370,680,370,150,img
+,,,,,,,,,,Meliá Bali,MBAL,Havana,HAV,,,,,,,,,,,,,,,,,,,PORTAL EMPLEADO,Newsfeed (imagen limpia),300x300,300,300,150,img
+,,,,,,,,,,Meliá Ho Tram Beach Resort,MHT,Varadero,VRA,,,,,,,,,,,,,,,,,,,PORTAL EMPLEADO,Banner carrusel portada,1204x250,1204,250,150,img
+,,,,,,,,,,Meliá Zanzibar,MZAN,Cayo Coco,CCCLa Palma,,,,,,,,,,,,,,,,,,,OTA / APAC,Ctrip & Meituan Flagship Store Banner,1125x531,1125,531,150,img
+,,,,,,,,,,Meliá Desert Palm,MDP,Formentera,FMA,,,,,,,,,,,,,,,,,,,OTA / APAC,Meituan Flagship Store Brandzone Banner,710x380,710,380,150,img
+,,,,,,,,,,INNSiDE New York Nomad,INYN,Bilbao,BIO,,,,,,,,,,,,,,,,,,,OTA / APAC,WeChat,750x556,750,556,150,img
+,,,,,,,,,,INNSiDE Manchester,INMA,Zaragoza,ZAZ,,,,,,,,,,,,,,,,,,,OTA / APAC,WeChat + PSD,768x1024,768,1024,150,img
+,,,,,,,,,,INNSiDE Liverpool,INLI,Venice,VCE,,,,,,,,,,,,,,,,,,,OTA / APAC,WeChat + PSD,1280x720,1280,720,150,img
+,,,,,,,,,,INNSiDE Newcastle,INNE,Florence,FLR,,,,,,,,,,,,,,,,,,,OTA / APAC,Baidu SEM PC Sitelink,1200x400,1200,400,150,img
+,,,,,,,,,,INNSiDE Berlin Mitte,INBM,Dusseldorf,DUS,,,,,,,,,,,,,,,,,,,OTA / APAC,Baidu SEM Mobile Sitelink,518x292,518,292,150,img
 ,,,,,,,,,,INNSiDE Frankfurt Eurotheum,INFE,Riviera Maya,RIV,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,INNSiDE Munich Parkstadt Schwabing,INMP,Puerto Vallarta,PVR,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,INNSiDE Leipzig,INLE,Lima,LIM,,,,,,,,,,,,,,,,,,,,,,,,,
