@@ -18,7 +18,7 @@ const PLACEMENTS = [
     { id: 'leaderboard_criteo_rtg', name: 'Leaderboard', size: '728x90', format: 'img', channel: 'Criteo RTG', seconds: 'na' },
     { id: 'vídeo_vertical_tiktok', name: 'Vídeo vertical', size: '1080x1920', format: 'vid', channel: 'Tik Tok', seconds: '10' },
     { id: 'billboard_criteo_rtg', name: 'Billboard', size: '970x250', format: 'img', channel: 'Criteo RTG', seconds: 'na' },
-    { id: 'slide_paquetes_riu_paquetes', name: 'Slide Paquetes Meliá', size: '1366x600', format: 'img', channel: 'Paquetes', seconds: 'na' },
+    { id: 'slide_paquetes_riu_paquetes', name: 'Slide Meliá Escapes', size: '1366x600', format: 'img', channel: 'Paquetes', seconds: 'na' },
     { id: 'paquetes_mx_banner_1_paquetes', name: 'Paquetes MX Banner 1', size: '1920x450', format: 'img', channel: 'Paquetes', seconds: 'na' }
 ];
 

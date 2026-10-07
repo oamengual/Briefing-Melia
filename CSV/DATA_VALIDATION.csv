@@ -1,11 +1,11 @@
 Tamaño,Formato,Formato_Abr,Estrategia,Brand,Canal,Abr_Canal,Hotel,Abr_Hotel,Destino,Abr_Destino,Campaña,Abr_Campaña,Mercado-Idioma,Agencias,Abr_Agencias,Contenido,Abr_Contenido
-1080x1080,video,vid,ongoing,vac,Google,google,Gran Meliá Palacio de los Duques,GMPD,Madrid,MAD,Ventas Privadas,loyalty,us-en,berepublic,br,usergeneratedcontent,ugc
-1080x1920,imagen,img,push,plz,Amazon,amz,Gran Meliá Fénix,GMFN,Barcelona,BCN,Black Friday,bf,ca-fr,cooltura,ct,remix,rmx
-1920x1080,gif,gif,,vacpkg,Tik Tok,tt,Gran Meliá Victoria,GMVC,Valencia,VLC,Meliá Escapes,meliaes,ca-en,contentjet,cj,voiceover,vo
-1200x1200,videotemplate,vtmp,,plzpkg,Meta,meta,Gran Meliá Don Pepe,GMDP,Alicante,ALC,Cyber Monday,cyber,mx-es,sapphire,sp,creator,cre
-960x1200,template de imagen para catálogo,tmpi,,,Taboola,tbl,Gran Meliá Sancti Petri,GMSP,Sevilla,SVQ,Megacaptación,mega,cr-es,influencer,inf,no aplìca,na
-1200x628,template de video para catalogo,tmpv,,,Criteo RTG,crtg,Gran Meliá Iguazú,GMIG,Malaga,AGP,Crédito,credito,jm-en,inhouse,inh,,
-300x60,,,,,App,app,Gran Meliá Jakarta,GMJK,Marbella,MAR,Hottest Winter Deals,hottest,pa-es,makingscience,ms,,
+1080x1080,video,vid,ongoing,Gran Meliá,Google,google,Gran Meliá Palacio de los Duques,GMPD,Madrid,MAD,Ventas Privadas,loyalty,us-en,berepublic,br,usergeneratedcontent,ugc
+1080x1920,imagen,img,push,Paradisus,Amazon,amz,Gran Meliá Fénix,GMFN,Barcelona,BCN,Black Friday,bf,ca-fr,cooltura,ct,remix,rmx
+1920x1080,gif,gif,,ME by Meliá,Tik Tok,tt,Gran Meliá Victoria,GMVC,Valencia,VLC,Meliá Escapes,meliaes,ca-en,contentjet,cj,voiceover,vo
+1200x1200,videotemplate,vtmp,,Meliá Hotels & Resorts,Meta,meta,Gran Meliá Don Pepe,GMDP,Alicante,ALC,Cyber Monday,cyber,mx-es,sapphire,sp,creator,cre
+960x1200,template de imagen para catálogo,tmpi,,INNSiDE by Meliá,Taboola,tbl,Gran Meliá Sancti Petri,GMSP,Sevilla,SVQ,Megacaptación,mega,cr-es,influencer,inf,no aplìca,na
+1200x628,template de video para catalogo,tmpv,,Sol by Meliá,Criteo RTG,crtg,Gran Meliá Iguazú,GMIG,Malaga,AGP,Crédito,credito,jm-en,inhouse,inh,,
+300x60,,,,ZEL,App,app,Gran Meliá Jakarta,GMJK,Marbella,MAR,Hottest Winter Deals,hottest,pa-es,makingscience,ms,,
 120x600,,,,,Newsletter,news,Gran Meliá Xian,GMXN,Cadiz,CAD,Love is in the City,love,ar-es,,,,
 160x600,,,,,Web,web,ME London,MELN,Ibiza,IBZ,,,co-es,,,,
 300x600,,,,,Paquetes,pkg,ME Dubai,MEDB,Mallorca,PMI,,,cl-es,,,,

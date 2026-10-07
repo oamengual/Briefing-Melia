@@ -1,11 +1,11 @@
 Tamaño,Formato,Formato_Abr,Estrategia,Año,Q,Mes,Brand,Canal,Abr_Canal,Hotel,Abr_Hotel,Destino,Abr_Destino,Campaña,Abr_Campaña,Mercado-Idioma,Agencias,Abr_Agencias,Contenido,Abr_Contenido,Segundos Vídeo,Versión
-1080x1080,video,vid,ongoing,25,q1,ene,vac,Google,google,Gran Meliá Palacio de los Duques,GMPD,Madrid,MAD,Ventas Privadas,loyalty,us-en,berepublic,br,usergeneratedcontent,ugc,6s,v1
-1080x1920,imagen,img,push,26,q2,feb,plz,Amazon,amz,Gran Meliá Fénix,GMFN,Barcelona,BCN,Black Friday,bf,ca-fr,cooltura,ct,remix,rmx,15s,v2
-1920x1080,gif,gif,,,q3,mar,vacpkg,Tik Tok,tt,Gran Meliá Victoria,GMVC,Valencia,VLC,Meliá Escapes,meliaes,ca-en,contentjet,cj,voiceover,vo,30s,v3
-1200x1200,videotemplate,vtmp,,,q4,abr,plzpkg,Meta,meta,Gran Meliá Don Pepe,GMDP,Alicante,ALC,Cyber Monday,cyber,mx-es,sapphire,sp,creator,cre,,v4
-960x1200,template de imagen para catálogo,tmpi,,,,may,,Taboola,tbl,Gran Meliá Sancti Petri,GMSP,Sevilla,SVQ,Megacaptación,mega,cr-es,influencer,inf,no aplìca,na,,v5
-1200x628,template de video para catalogo,tmpv,,,,jun,,Criteo RTG,crtg,Gran Meliá Iguazú,GMIG,Malaga,AGP,Crédito,credito,jm-en,inhouse,inh,,,,v6
-300x60,,,,,,jul,,App,app,Gran Meliá Jakarta,GMJK,Marbella,MAR,Hottest Winter Deals,hottest,pa-es,makingscience,ms,,,,v7
+1080x1080,video,vid,ongoing,25,q1,ene,Gran Meliá,Google,google,Gran Meliá Palacio de los Duques,GMPD,Madrid,MAD,Ventas Privadas,loyalty,us-en,berepublic,br,usergeneratedcontent,ugc,6s,v1
+1080x1920,imagen,img,push,26,q2,feb,Paradisus,Amazon,amz,Gran Meliá Fénix,GMFN,Barcelona,BCN,Black Friday,bf,ca-fr,cooltura,ct,remix,rmx,15s,v2
+1920x1080,gif,gif,,,q3,mar,ME by Meliá,Tik Tok,tt,Gran Meliá Victoria,GMVC,Valencia,VLC,Meliá Escapes,meliaes,ca-en,contentjet,cj,voiceover,vo,30s,v3
+1200x1200,videotemplate,vtmp,,,q4,abr,Meliá Hotels & Resorts,Meta,meta,Gran Meliá Don Pepe,GMDP,Alicante,ALC,Cyber Monday,cyber,mx-es,sapphire,sp,creator,cre,,v4
+960x1200,template de imagen para catálogo,tmpi,,,,may,INNSiDE by Meliá,Taboola,tbl,Gran Meliá Sancti Petri,GMSP,Sevilla,SVQ,Megacaptación,mega,cr-es,influencer,inf,no aplìca,na,,v5
+1200x628,template de video para catalogo,tmpv,,,,jun,Sol by Meliá,Criteo RTG,crtg,Gran Meliá Iguazú,GMIG,Malaga,AGP,Crédito,credito,jm-en,inhouse,inh,,,,v6
+300x60,,,,,,jul,ZEL,App,app,Gran Meliá Jakarta,GMJK,Marbella,MAR,Hottest Winter Deals,hottest,pa-es,makingscience,ms,,,,v7
 120x600,,,,,,sep,,Newsletter,news,Gran Meliá Xian,GMXN,Cadiz,CAD,Love is in the City,love,ar-es,,,,,,v8
 160x600,,,,,,oct,,Web,web,ME London,MELN,Ibiza,IBZ,,,co-es,,,,,,v9
 300x600,,,,,,nov,,Paquetes,pkg,ME Dubai,MEDB,Mallorca,PMI,,,cl-es,,,,,,v10

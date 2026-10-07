@@ -30,8 +30,8 @@ canal,placement,nombre,ancho,alto,peso max,tipologia
 "Newsletter","Desktop","1200x900",1200,900,500,img
 "Newsletter","Mobile","1200x1200",1200,1200,500,img
 "Newsletter","Footer","1200x900",1200,900,500,img
-"Paquetes","Slide Paquetes Meliá","1366x600",1366,600,500,img
-"Paquetes","Slide Mobile Paquetes Meliá","480x400",480,400,500,img
+"Paquetes","Slide Meliá Escapes","1366x600",1366,600,500,img
+"Paquetes","Slide Mobile Meliá Escapes","480x400",480,400,500,img
 "Paquetes","Slide Paquetes US/CA","1366x400",1366,400,500,img
 "Paquetes","Paquetes MX Banner 1","1920x450",1920,450,500,img
 "Meta","Videotemplate vertical","1080x1920",1080,1920,10240,vid
