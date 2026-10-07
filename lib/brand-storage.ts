@@ -11,8 +11,8 @@ const ASSETS_PREFIX = 'mockup_asset_';
 export async function getBrands(): Promise<Brand[]> {
     try {
         const brands = await get<Brand[]>(BRANDS_KEY);
-        if (!brands || brands.length < 14) {
-            // Seed with Meliá brands if empty or incomplete (to force upgrade to 14 brands)
+        if (!brands || brands.length < 15) {
+            // Seed with Meliá brands if empty or incomplete (to force upgrade to 15 brands)
             await set(BRANDS_KEY, INITIAL_MELIA_BRANDS);
             for (const asset of INITIAL_MELIA_ASSETS) {
                 await set(ASSETS_PREFIX + asset.id, asset);
