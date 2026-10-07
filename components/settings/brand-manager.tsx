@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import { Plus, Trash2, Upload, Type, Palette, Image as ImageIcon, Save, ArrowLeft, Loader2, Edit2 } from 'lucide-react';
+import { Plus, Trash2, Upload, Type, Palette, Image as ImageIcon, Save, ArrowLeft, Loader2, Edit2, Maximize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Brand, BrandAsset } from '@/lib/types';
 import { getBrands, saveBrand, deleteBrand, saveAsset, getAsset, fileToBase64 } from '@/lib/brand-storage';
 import { cn } from "@/lib/utils";
@@ -411,19 +412,36 @@ export function BrandManager() {
                 <TabsContent value="logos" className="space-y-6 focus-visible:outline-none">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                         {logoAssets.map((logo) => (
-                            <div key={logo.id} className="group relative aspect-square border rounded-md p-4 flex items-center justify-center bg-white/50 pattern-grid-lg">
-                                <img src={logo.data} alt={logo.name} className="max-w-full max-h-full object-contain" />
-                                <Button
-                                    variant="destructive" size="icon"
-                                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 radius-btn shadow-sm"
-                                    onClick={() => removeLogo(logo.id)}
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </Button>
-                                <div className="absolute bottom-0 left-0 right-0 bg-background/90 backdrop-blur-sm text-foreground text-[10px] font-medium p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity border-t border-border truncate">
-                                    {logo.name}
+                            <Dialog key={logo.id}>
+                                <div className="group relative aspect-square border rounded-md p-4 flex items-center justify-center bg-white/50 pattern-grid-lg">
+                                    <DialogTrigger asChild>
+                                        <button className="w-full h-full flex items-center justify-center cursor-pointer focus:outline-none">
+                                            <img src={logo.data} alt={logo.name} className="max-w-full max-h-full object-contain" />
+                                            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <Maximize2 className="w-6 h-6 text-foreground/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            </div>
+                                        </button>
+                                    </DialogTrigger>
+                                    <Button
+                                        variant="destructive" size="icon"
+                                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 radius-btn shadow-sm z-10"
+                                        onClick={(e) => { e.stopPropagation(); removeLogo(logo.id); }}
+                                    >
+                                        <Trash2 className="w-4 h-4" />
+                                    </Button>
+                                    <div className="absolute bottom-0 left-0 right-0 bg-background/90 backdrop-blur-sm text-foreground text-[10px] font-medium p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity border-t border-border truncate pointer-events-none">
+                                        {logo.name}
+                                    </div>
                                 </div>
-                            </div>
+                                <DialogContent className="max-w-3xl border-0 bg-transparent shadow-none p-0">
+                                    <DialogHeader className="sr-only">
+                                        <DialogTitle>{logo.name}</DialogTitle>
+                                    </DialogHeader>
+                                    <div className="relative w-full aspect-video bg-white/90 pattern-grid-lg rounded-xl flex items-center justify-center p-8 overflow-hidden shadow-2xl">
+                                        <img src={logo.data} alt={logo.name} className="max-w-full max-h-full object-contain drop-shadow-sm" />
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                         ))}
 
                         <div className="aspect-square border-2 border-dashed rounded-xl flex flex-col items-center justify-center hover:bg-muted/30 hover:border-primary/50 transition-colors">
