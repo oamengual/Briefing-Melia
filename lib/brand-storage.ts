@@ -3,16 +3,26 @@
 import { Brand, BrandAsset } from './types';
 import { get, set, del } from 'idb-keyval';
 
+import { INITIAL_MELIA_BRANDS, INITIAL_MELIA_ASSETS } from './melia-brands';
+
 const BRANDS_KEY = 'mockup_brands';
 const ASSETS_PREFIX = 'mockup_asset_';
 
 export async function getBrands(): Promise<Brand[]> {
     try {
         const brands = await get<Brand[]>(BRANDS_KEY);
-        return brands || [];
+        if (!brands || brands.length === 0) {
+            // Seed with Meliá brands if empty
+            await set(BRANDS_KEY, INITIAL_MELIA_BRANDS);
+            for (const asset of INITIAL_MELIA_ASSETS) {
+                await set(ASSETS_PREFIX + asset.id, asset);
+            }
+            return INITIAL_MELIA_BRANDS;
+        }
+        return brands;
     } catch (e) {
         console.error("Failed to load brands", e);
-        return [];
+        return INITIAL_MELIA_BRANDS;
     }
 }
 

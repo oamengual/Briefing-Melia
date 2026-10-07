@@ -52,7 +52,7 @@ export interface BriefingState {
 
 const DEFAULT_INPUTS: CampaignInputs = {
     campaignName: '',
-    brand: 'Meliá', // Keep existing default for brand
+    brand: 'Meliá Hotels & Resorts',
     strategy: 'Flash', // Keep existing default for strategy
     year: new Date().getFullYear().toString(),
     month: (new Date().getMonth() + 1).toString().padStart(2, '0'), // Keep existing default for month
