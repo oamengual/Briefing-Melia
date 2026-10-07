@@ -9,7 +9,7 @@ export interface Market {
   defaultLang: string;
 }
 
-export type Format = 'img' | 'vid' | 'html5';
+export type Format = 'img' | 'vid' | 'html5' | 'gif';
 export type Channel = 'Google' | 'Amazon' | 'Tik Tok' | 'Meta' | 'Taboola' | 'Criteo RTG' | 'App' | 'Newsletter' | 'Web' | 'Paquetes' | 'YT / Demand Gen' | 'Expedia';
 
 export interface Placement {
