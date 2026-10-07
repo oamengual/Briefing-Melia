@@ -145,8 +145,8 @@ export function ContentManager() {
 
     const exclusionRules = [
         { key: 'addTransferLink', label: 'Add Transfer Link (Landing)', icon: <LinkIcon className="w-3 h-3" /> },
-        { key: 'addRiuClassLink', label: 'Add RIU Class Link', icon: <LinkIcon className="w-3 h-3" /> },
-        { key: 'excludeGaroe', label: 'Exclude Riu Garoe', icon: <MapPin className="w-3 h-3" /> },
+        { key: 'addMeliáClassLink', label: 'Add Meliá Class Link', icon: <LinkIcon className="w-3 h-3" /> },
+        { key: 'excludeGaroe', label: 'Exclude Meliá Garoe', icon: <MapPin className="w-3 h-3" /> },
         { key: 'excludeFlightHotel', label: 'Exclude Flight+Hotel', icon: <Globe className="w-3 h-3" /> },
         { key: 'excludePlazaHotels', label: 'Exclude Plaza Hotels', icon: <MapPin className="w-3 h-3" /> },
     ];

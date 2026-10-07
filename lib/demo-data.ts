@@ -21,7 +21,7 @@ export const DEMO_BRIEFS: Brief[] = [
         state: {
             inputs: {
                 campaignName: 'Black Friday 2026 Global',
-                brand: 'Riu',
+                brand: 'Meliá',
                 strategy: 'Flash',
                 year: '2026',
                 month: '11',
@@ -69,7 +69,7 @@ export const DEMO_BRIEFS: Brief[] = [
         state: {
             inputs: {
                 campaignName: 'Hottest Winter Sales US/CA',
-                brand: 'Riu',
+                brand: 'Meliá',
                 strategy: 'Tactical',
                 year: '2026',
                 month: '01',
@@ -109,7 +109,7 @@ export const DEMO_BRIEFS: Brief[] = [
         state: {
             inputs: {
                 campaignName: 'Venta Especial Costa Rica',
-                brand: 'Riu',
+                brand: 'Meliá',
                 strategy: 'Flash',
                 year: '2026',
                 month: '08',
@@ -148,7 +148,7 @@ export const DEMO_BRIEFS: Brief[] = [
         state: {
             inputs: {
                 campaignName: 'Summer 2026 Early Booking',
-                brand: 'Riu',
+                brand: 'Meliá',
                 strategy: 'Early Booking',
                 year: '2026',
                 month: '06',
@@ -194,7 +194,7 @@ export const DEMO_BRIEFS: Brief[] = [
         state: {
             inputs: {
                 campaignName: 'Last Minute Getaways APAC',
-                brand: 'Riu',
+                brand: 'Meliá',
                 strategy: 'Last Minute',
                 year: '2026',
                 month: '04',

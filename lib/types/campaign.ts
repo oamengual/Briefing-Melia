@@ -138,7 +138,7 @@ export interface BriefTranslation extends Partial<CreativeInputs> {
 
 export interface MarketContentSettings {
     addTransferLink: boolean;
-    addRiuClassLink: boolean;
+    addMeliáClassLink: boolean;
     excludeGaroe: boolean;
     excludeFlightHotel: boolean;
     excludePlazaHotels: boolean;

@@ -52,7 +52,7 @@ export interface BriefingState {
 
 const DEFAULT_INPUTS: CampaignInputs = {
     campaignName: '',
-    brand: 'Riu', // Keep existing default for brand
+    brand: 'Meliá', // Keep existing default for brand
     strategy: 'Flash', // Keep existing default for strategy
     year: new Date().getFullYear().toString(),
     month: (new Date().getMonth() + 1).toString().padStart(2, '0'), // Keep existing default for month
@@ -122,7 +122,7 @@ export const useBriefingStore = create<BriefingState>((set) => ({
     setMarketSetting: (market, updates) => set((state) => {
         const currentSettings = state.content.marketSettings[market] || {
             addTransferLink: false,
-            addRiuClassLink: false,
+            addMeliáClassLink: false,
             excludeGaroe: false,
             excludeFlightHotel: false,
             excludePlazaHotels: false,

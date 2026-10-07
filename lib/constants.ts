@@ -92,8 +92,8 @@ export const PLACEMENTS: Placement[] = [
     { id: 'footer_newsletter', name: 'Footer', size: '1200x900', width: 1200, height: 900, format: 'img', channel: 'Newsletter', seconds: 'na', maxFileSize: 500 },
 
     // Paquetes
-    { id: 'slide_paquetes_riu_paquetes', name: 'Slide Paquetes RIU', size: '1366x600', width: 1366, height: 600, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 500 },
-    { id: 'slide_mobile_paquetes_riu_paquetes', name: 'Slide Mobile Paquetes RIU', size: '480x400', width: 480, height: 400, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 500 },
+    { id: 'slide_paquetes_riu_paquetes', name: 'Slide Paquetes Meliá', size: '1366x600', width: 1366, height: 600, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 500 },
+    { id: 'slide_mobile_paquetes_riu_paquetes', name: 'Slide Mobile Paquetes Meliá', size: '480x400', width: 480, height: 400, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 500 },
     { id: 'slide_paquetes_us_ca_paquetes', name: 'Slide Paquetes US/CA', size: '1366x400', width: 1366, height: 400, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 500 },
     { id: 'paquetes_mx_banner_1_paquetes', name: 'Paquetes MX: Banner 1', size: '1920x450', width: 1920, height: 450, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 500 },
     { id: 'paquetes_mx_banner_1_mobile_paquetes', name: 'Paquetes MX: Banner 1 Mobile', size: '770x180', width: 770, height: 180, format: 'img', channel: 'Paquetes', seconds: 'na', maxFileSize: 200 },
